@@ -1,0 +1,812 @@
+% Build with the eight vector PDFs in figures/manuscript/.
+\documentclass[11pt,letterpaper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage[sc]{mathpazo}
+\usepackage{microtype}
+\usepackage[letterpaper,textwidth=5.68in,top=.93in,bottom=.94in,footskip=.44in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\newcommand{\paperauthor}{Pierre-Luc Dallaire-Demers}
+\author{\paperauthor}
+\hypersetup{pdfauthor={\paperauthor},pdftitle={Hilbert–Pólya approach to the Riemann theorem},pdfsubject={A spectral construction, prime dynamics, and the theta lift}}
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}{\z@}{-3.1ex plus -.6ex minus -.2ex}{1.25ex plus .2ex}{\normalfont\large\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}{-2.0ex plus -.3ex}{.75ex}{\normalfont\normalsize\itshape}}
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  {\small\noindent\textbf{#1.}\enspace #2\par}%
+  \vskip\belowcaptionskip}
+\newcommand{\papercontents}{%
+  \par\smallskip
+  \noindent\hfil\begin{minipage}{.9\linewidth}
+    \small
+    \pdfbookmark[1]{Contents}{papercontents}%
+    {\bfseries Contents\par}\smallskip
+    \renewcommand*\l@section{\@dottedtocline{1}{0pt}{1.65em}}%
+    \@starttoc{toc}%
+  \end{minipage}\hfil\par}
+\setcounter{tocdepth}{1}
+\makeatother
+\setlength{\abovecaptionskip}{5pt}
+\setlength{\textfloatsep}{13pt plus 3pt minus 2pt}
+\setlength{\intextsep}{12pt plus 3pt minus 2pt}
+\renewcommand{\topfraction}{.88}
+\renewcommand{\bottomfraction}{.75}
+\renewcommand{\textfraction}{.10}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\Dom}{\operatorname{Dom}}
+\newcommand{\Ran}{\operatorname{ran}}
+\newcommand{\HH}{H_{\mathrm{s}}}
+\newcommand{\K}{\mathcal K}
+\newcommand{\Zc}{\mathcal Z}
+\numberwithin{equation}{section}
+\setlength{\parindent}{1.15em}
+\setlength{\emergencystretch}{1em}
+\raggedbottom
+\begin{document}
+\begin{center}
+{\fontsize{19}{23}\selectfont Hilbert--P\'olya approach to the Riemann theorem\par}
+\vspace{7pt}
+{\normalsize\renewcommand{\thefootnote}{\ensuremath{\ast}}%
+\paperauthor\footnote[1]{\href{mailto:pierre-luc@pauli.group}{pierre-luc@pauli.group}}\par}
+{\small Pauli Group\par}
+\vspace{3pt}
+{\small 21 November 2026}
+\end{center}
+\vspace{6pt}
+\begin{abstract}
+The Hilbert--P\'olya proposal seeks to explain the location of the Riemann zeta zeros through the reality of quantum energies. Taking Alp\"oge's critical-line theorem as input, we construct a self-adjoint Hamiltonian from primes whose signed energies are the heights of the nontrivial zeros. The starting point is a gas with one bosonic mode of energy $\log p$ for each prime $p$. Its energy fluctuations at one temperature give, through the completed partition function, the moments that determine the couplings of a nearest-neighbor chain. A frequency $\lambda$ measured at the end site gives a squared zeta energy $1/\lambda-u$ for a known shift $u$, while the strength of the line gives its multiplicity. When the modes evolve at their signed zeta energies, their interference produces a Ramsey signal whose slope changes at prime-power times. The same spectral information has a wave interpretation. A shear in Alp\"oge's theta lift supplies a phase circle. Counting each positive harmonic once yields the boundary response of a lossless line, and matching the static response in a selected channel closes the line with a short circuit. Its standing waves then have the zeta frequencies. The lift supplies the measurable phase while the harmonic count and the choice of closure enter the construction separately.
+\end{abstract}
+
+\papercontents
+
+\section{The Hilbert--P\'olya proposal}
+For $\operatorname{Re}s>1$ the Riemann zeta function is the convergent sum $\zeta(s)=\sum_{n\ge1}n^{-s}$. Analytic continuation extends it to the complex plane apart from a pole at one. Its nontrivial zeros lie in the strip $0<\operatorname{Re}s<1$. The Riemann hypothesis says that they all lie on the line $\operatorname{Re}s=1/2$.
+
+In G\"ottingen around 1913, Edmund Landau asked George P\'olya whether physics could explain the Riemann hypothesis. P\'olya suggested looking for a system whose real eigenvalues $E$ would place the zeros at $\tfrac12+iE$~\cite{polya}. For a nontrivial zero $\rho=\beta+i\gamma$, the corresponding candidate energy is
+\[
+ E_\rho=\frac{\rho-1/2}{i}=\gamma+i(1/2-\beta).
+\]
+A zero off the critical line would give its candidate energy an imaginary part. Identifying all the $E_\rho$ as eigenvalues of an independently defined self-adjoint Hamiltonian would therefore imply the Riemann hypothesis. For a differential operator this identification calls for more than a wave equation. The boundary condition helps specify the domain on which the Hamiltonian generates unitary evolution.
+
+To identify a spectrum, we must match multiplicities as well as level positions. In finite dimensions the characteristic determinant does both. Its arithmetic counterpart here is the completed zeta function
+\begin{equation}
+ \xi(s)=\tfrac12s(s-1)\pi^{-s/2}\Gamma(s/2)\zeta(s),
+ \qquad A(E)=\xi(\tfrac12-iE)
+ \label{eq:completion}
+\end{equation}
+which is entire. The extra factors remove the pole at $s=1$ and cancel the trivial zeros of $\zeta$ at the negative even integers. The functional equation $\xi(s)=\xi(1-s)$ gives $A(E)=A(-E)$, just as a spectrum with paired energies has a determinant even in energy. We use $1/2-iE$ to agree with the Fourier convention $e^{-iEt}$.
+
+For a level pair $\pm\gamma$, the two factors in a characteristic polynomial, normalized to one at $E=0$, multiply to $1-E^2/\gamma^2$. If the level has degeneracy $m_\gamma$, this factor occurs $m_\gamma$ times. The spectral identity sought in this paper is therefore
+\begin{equation}
+ \det\bigl(I-E^2H_+^{-2}\bigr)=
+ \prod_{\gamma>0}(1-E^2/\gamma^2)^{m_\gamma}
+ =\frac{A(E)}{A(0)} .
+ \label{eq:det}
+\end{equation}
+Here $H_+$ denotes the positive-energy part of $H$. An infinite spectrum requires a convergence check. The number of positive zero heights up to $T$, counted with multiplicity, grows as $(T/2\pi)\log T$, so $\sum_{\gamma>0}m_\gamma/\gamma^2$ is finite. This sum is the trace of $H_+^{-2}$, and its finiteness makes the determinant in \eqref{eq:det} well defined.
+
+Alp\"oge obtains the critical-line conclusion by controlling a smoothed count of prime powers with a sequence of integral transforms called theta lifts~\cite{alpoge,sutherland,primeinput}. Each nontrivial zero produces a pole in the Laplace transform of the count. The growth estimate excludes poles to the right of the critical line, and the functional equation excludes their reflections. We take that conclusion as input. It identifies $E_\rho$ with the real ordinate $\gamma$ and will give our state space a positive norm. The inverse problem is to determine matrix elements from the primes before solving for the spectrum. Meyer previously related the zeros to dilations, and Suzuki constructed a self-adjoint boundary operator assuming the critical-line property~\cite{meyerphysics,suzukiglobal}.
+
+Near a zero $\gamma$ of order $d$, $A(z)$ has a factor $(z-\gamma)^d$. Its logarithmic derivative $m(z)=-A'(z)/A(z)$ thus has a pole with coefficient $d$ in front of $1/(\gamma-z)$. This is the form of a resonant response, with the pole position giving the energy and its strength giving the multiplicity. Figure~\ref{fig:overview} shows two ways to obtain $m$. The first starts with fluctuations of a gas of prime modes and ends at the first site of a spin chain. Interference of the reconstructed signed energy levels then reveals the prime powers as times at which the signal changes slope. The second construction starts with a shear wave in the theta lift and asks which measurement gives the same response and which wall turns its poles into standing-wave frequencies.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\linewidth]{figures/manuscript/overview.pdf}
+\caption{Two realizations of the boundary response. Prime-gas cumulants fix the chain on the left. On the right, each detector setting supplies one heat factor. Counting the settings with unit weight recovers $m$. The open port has reflection amplitude $\Theta$. Static matching in the chosen channel selects the short circuit.}
+\label{fig:overview}
+\end{figure}
+
+\section{A Hamiltonian specified by primes}\label{sec:chain}
+\subsection*{Two uses of the partition function}
+An oscillator of excitation energy $\log p$ can hold any number of quanta. Its thermal partition function is the geometric series with ratio $p^{-s}$ at inverse temperature $s$. Putting one independent bosonic oscillator at each prime makes the product of their partition functions the Euler product for $\zeta$. Indeed a configuration $\{k_p\}$ has energy $\sum_p k_p\log p=\log n$, where $n=\prod_p p^{k_p}$. Unique prime factorization gives precisely one gas state for each positive integer. Thus for $s>1$ the gas Hamiltonian $L$ satisfies
+\[
+ \Tr e^{-sL}=\sum_{n\ge1} n^{-s}=\prod_p(1-p^{-s})^{-1}=\zeta(s).
+\]
+The gas has known energies $\log n$. The energies we seek belong to a second system, whose couplings we shall infer from fluctuations of the first.
+
+In a Gibbs state the first derivative of $\log Z$ is $-\langle L\rangle$ and the second is the energy variance. Higher derivatives give the higher energy cumulants, with alternating signs. Here all of them can be computed in the convergent prime gas. For example,
+\[
+ -\frac{d}{ds}\log\zeta(s)
+     =\sum_p\sum_{j\ge1}(\log p)p^{-js}\qquad (s>1).
+\]
+To pass to $\log\xi$ we add the known elementary and gamma terms of \eqref{eq:completion}. Knowing all these derivatives at $s=2$ will suffice. For a finite chain only finitely many derivatives are needed.
+
+The completed function relates those thermal derivatives to the unknown zeta energies. Its Hadamard factorization is a product over zeros. The exponential factors from opposite zeros cancel, and evenness leaves the overall constant $A(0)$. At the imaginary energy $E=i\sqrt u$, with $u>0$, a pair contributes the positive factor $1+u/\gamma^2$. Taking the logarithm adds the contributions from different pairs. Differentiating in $u$ then turns them into inverse powers of $\gamma^2+u$. Writing $L_\xi(u)=\log\xi(1/2+\sqrt u)$ gives
+\begin{equation}
+ \begin{aligned}
+ L_\xi(u)-L_\xi(0)&=\sum_{\gamma>0}m_\gamma\log(1+u/\gamma^2),\\
+ S_r(u):=\frac{(-1)^{r-1}}{(r-1)!}L_\xi^{(r)}(u)
+      &=\sum_{\gamma>0}\frac{m_\gamma}{(\gamma^2+u)^r},
+      \qquad r\ge1 .
+ \end{aligned}
+ \label{eq:powers}
+\end{equation}
+The two sides of \eqref{eq:powers} serve different purposes. The derivatives on the left compute $S_r$ from the prime gas and the completion factors. For example, the chain rule gives $S_1(9/4)=\xi'(2)/(3\xi(2))$, to which the gas at inverse temperature two contributes $-\langle L\rangle/3$. On the right, each energy contributes a power of the same number $\lambda_\gamma=(\gamma^2+u)^{-1}$. In quantum mechanics $S_r$ would therefore be the trace of $(H_+^2+uI)^{-r}$. The critical-line result makes $\lambda_\gamma$ positive, and the inverse keeps it bounded however large $\gamma$ becomes. Those properties allow us to use the arithmetic data as moments of a quantum observable.
+
+\subsection*{From moments to on-site energies and hopping amplitudes}
+We now evaluate the moments at $u=9/4$, so the prime gas is at inverse temperature $1/2+\sqrt u=2$. With $S=S_1(u)$, the quantities
+\[
+   \lambda_\gamma=\frac1{\gamma^2+u},\qquad
+   w_\gamma=m_\gamma\lambda_\gamma/S
+\]
+satisfy $\sum_{\gamma>0}w_\gamma=1$. To see why this particular normalization matters, give each state at energy $\gamma$ weight $\lambda_\gamma/S$. A level occupied by $m_\gamma$ independent states then carries total weight $w_\gamma$. We want the first site of a chain to realize this distribution. Measuring its Hamiltonian in the end-site state should give $\lambda_\gamma$ with probability $w_\gamma$. All the moments of those outcomes are known from the thermal derivatives,
+\begin{equation}
+ \mu_n=\sum_{\gamma>0}w_\gamma\lambda_\gamma^n
+       =\frac{S_{n+1}(u)}{S},\qquad \mu_0=1 .
+ \label{eq:mom}
+\end{equation}
+
+We can build such a chain even before locating a single spectral line. Call its Hamiltonian $K$ and its first site $|0\rangle$. The vector $K|0\rangle$ must have projection amplitude $\mu_1$ on $|0\rangle$ and squared norm $\mu_2$. Its remaining component therefore has length $\sqrt{\mu_2-\mu_1^2}$. Choosing the direction of that component as the next basis vector gives
+\begin{equation}
+ K|0\rangle=a_0|0\rangle+b_0|1\rangle,\qquad
+ a_0=\mu_1,\qquad b_0=\sqrt{\mu_2-\mu_1^2}.
+ \label{eq:hop}
+\end{equation}
+The first on-site energy is the end-site mean of $K$ and the first hopping amplitude is its standard deviation. For example, $a_0=S_2/S_1$. At $s=2$ the arithmetic data give $S=0.02302207718$, $a_0=0.001586900335$ and $b_0=0.001885187523$.
+
+For the rest of the chain, represent $|0\rangle,K|0\rangle,K^2|0\rangle,\ldots$ by the monomials $1,x,x^2,\ldots$, with $K$ acting by multiplication by $x$. Every inner product needed for Gram--Schmidt is known, since $\langle x^i,x^j\rangle=\mu_{i+j}$. The orthogonal polynomial for site $n$ has degree $n$. Multiplication by $x$ raises its degree to $n+1$, so it has zero overlap with sites beyond $n+1$. Symmetry of $K$ rules out hopping past the neighbor on the other side as well. This is the Lanczos construction~\cite{jacobi}. Its diagonal entries set the local fields and its off-diagonal entries set the hopping amplitudes in the one-excitation sector of an XY spin chain.
+
+In this basis a polynomial $f$ has squared norm $\sum_\gamma w_\gamma|f(\lambda_\gamma)|^2$. A nonzero polynomial has finitely many roots, while the spectral measure assigns positive weight to infinitely many distinct values. The norm is therefore positive at every Gram--Schmidt step. Completing the polynomials in this norm gives the chain's Hilbert space. Since polynomials approximate continuous functions on $[0,1/u]$, agreement on all the moments fixes the spectral measure uniquely.
+
+\subsection*{The zeta energies and their multiplicities}
+Suppose the excitation starts at the end site $|0\rangle$. Its return amplitude $\langle0|e^{-itK}|0\rangle$ contains a term $w_\gamma e^{-it\lambda_\gamma}$ for each distinct line. The frequency measured in this time record is $\lambda_\gamma$, and its spectral weight is $w_\gamma$. Applying the frequency conversion to $K$ by spectral calculus gives the positive zeta Hamiltonian
+\begin{equation}
+ H_{\rm cyc}=\bigl[K^{-1}-uI\bigr]^{1/2}.
+ \label{eq:unbound}
+\end{equation}
+This transformation leaves the eigenvectors fixed and changes the phase rate of each one from $\lambda$ to $E(\lambda)=\sqrt{1/\lambda-u}$. High zeta energies correspond to chain frequencies close to zero. Although zero is an accumulation point, it carries no end-site probability. Since the vectors $K^n|0\rangle$ span a dense subspace, an eigenvector at zero would have to be orthogonal to the entire chain. Thus $K$ has no kernel, even though its inverse is unbounded. Spectral calculus defines \eqref{eq:unbound} as a self-adjoint operator on the states of finite second energy moment. The end site itself lies outside that domain, since
+\[
+ \sum_{\gamma>0}w_\gamma\gamma^2
+   =\frac1S\sum_{\gamma>0}m_\gamma\frac{\gamma^2}{\gamma^2+u}=\infty .
+\]
+This divergence concerns the time derivative of the state at $t=0$. The unitary $e^{-itH_{\rm cyc}}$ itself is defined on the whole Hilbert space. The local couplings of the spin chain generate $e^{-itK}$. To make each mode advance at its zeta frequency requires evolution under the transformed Hamiltonian.
+
+Within a given eigenspace, successive powers of $K$ only multiply the projection of $|0\rangle$ by successive powers of the same eigenvalue. The chain therefore supplies one eigenvector per distinct positive level. The information needed to restore the multiplicity survives in the line strength. If $P_\lambda$ projects onto a resolved line, $\langle0|P_\lambda|0\rangle=w_\gamma$. Each state contributed $\lambda/S$ to this weight, so $S\langle0|P_\lambda|0\rangle/\lambda$ recovers the integer $m_\gamma$. Assigning that many orthogonal states to $E(\lambda)$ defines $H_+$. Including the negative-frequency partners gives $H=H_+\oplus(-H_+)$. This direct sum is self-adjoint on the states of finite second energy moment and realizes the determinant in \eqref{eq:det}. The signed energies describe frequencies about the symmetry center. The positive branch remains a lower-bounded Hamiltonian.
+
+A finite chain gives a direct calculation. Retaining $N$ sites keeps the polynomials of degrees $0$ through $N-1$. In the monomial basis the norm matrix is $M^{(0)}_{ij}=\mu_{i+j}$ and the matrix elements of $K$ are $M^{(1)}_{ij}=\mu_{i+j+1}$. Since $i,j\le N-1$, the first $N$ sites require moments only through $\mu_{2N-1}$. The three largest generalized eigenvalues of $M^{(1)}v=\lambda M^{(0)}v$ give estimates of the three lowest energies through \eqref{eq:unbound}.
+
+The matrix entries come from the Taylor series of $L_\xi(9/4+x)$ at $x=0$, evaluated from the gamma and zeta functions at $s=2$. If $f_r$ is the coefficient of $x^r$, then $S_r=(-1)^{r-1}r f_r$. At finite size the Rayleigh--Ritz variational principle maximizes over a smaller space, which explains the convergence in Figure~\ref{fig:chain-convergence}. As the chain grows, its ordered Ritz values increase towards the eigenvalues of $K$, while $\sqrt{1/\lambda-u}$ decreases. With exact moments each estimate approaches the corresponding distinct level from above. At sixteen sites the three energies in Table~\ref{tab:chain} agree to the displayed digits at working precisions of 200 and 260 decimal digits. Appendix~\ref{app:checks} makes an independent check using moments of a Gaussian heat trace. Its $16\times16$ matrix gives the same first three energies to six decimal places.
+
+Truncating the chain limits how many moments enter the calculation. Each moment still contains a convergent sum over all primes. A different construction restricts the prime data themselves. On a time interval $(-a,a)$, only prime powers $p^j\le e^{2a}$ enter Suzuki's arithmetic norm. The resulting interval operator gives an upper bound on each distinct positive energy, decreasing to that energy as the interval grows (Appendix~\ref{app:checks})~\cite{suzukiconvergence}.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\linewidth]{figures/manuscript/chain-convergence.pdf}
+\caption{Convergence of the three lowest positive energies as the chain grows. Each measured chain frequency $\lambda_{j,N}$ gives an energy estimate $E_{j,N}$. The zero heights $\gamma_j$ enter only in the comparison on the right. The points were computed from thermal moments at 210 decimal digits and checked at 260.}
+\label{fig:chain-convergence}
+\end{figure}
+
+All the line positions and strengths can also be read from the response at the end site. In the spectral basis the operator $[I-(z^2+u)K]^{-1}$ multiplies each mode by $[1-(z^2+u)\lambda_\gamma]^{-1}$. This denominator vanishes at precisely the two signed energies of the mode. Weighting the terms by $w_\gamma$ and using \eqref{eq:powers} gives
+\begin{equation}
+ -\frac{A'(z)}{A(z)}
+ =2zS\,\langle0|[I-(z^2+u)K]^{-1}|0\rangle .
+ \label{eq:end}
+\end{equation}
+A pole marks an energy at which the response to a weak drive becomes resonant. Substituting $w_\gamma=m_\gamma\lambda_\gamma/S$ makes the contribution of the line $2z\,m_\gamma/(\gamma^2-z^2)$, with coefficient $m_\gamma$ in front of $1/(\gamma-z)$ at the positive energy. Thus a measurement at one site determines the data for a second experiment, in which phases advance at the signed zeta energies themselves.
+
+\section{The primes in the quantum time evolution}\label{sec:primewave}
+The end-site return under $K$ contains an oscillation $w_\gamma e^{-it\lambda_\gamma}$ at each chain frequency. Once the line positions and strengths have supplied the energies and multiplicities of the signed Hamiltonian $H$, a different time record becomes available. In the trace of $e^{-itH}$, each state contributes its phase, so the pair at $\pm\gamma$ contributes $m_\gamma(e^{-it\gamma}+e^{it\gamma})$. The resulting sum over phases, called the \emph{wave trace}, is the Fourier transform of the density of states. We measure $t$ in units of the reduced Planck constant divided by the chosen energy unit.
+
+The spectrum is infinite. Averaging the trace over a smooth time window $\phi$ of compact support makes the sum well defined, since the Fourier transform of the window suppresses large energies. With our Fourier convention this gives
+\[
+ W[\phi]=\Tr\!\int \phi(t)e^{-itH}\,dt
+         =\sum_\gamma m_\gamma\widehat\phi(\gamma),
+ \qquad \widehat\phi(E)=\int \phi(t)e^{-itE}\,dt .
+\]
+Here the sum runs over distinct signed energies. The Weil explicit formula evaluates the same average from the primes~\cite{connesmarcolli}. For windows supported in $t>0$, its time-domain expression is
+\begin{equation}
+ W(t)=e^{t/2}-\frac{e^{-5t/2}}{1-e^{-2t}}
+      -\sum_p\sum_{j\ge1}\frac{\log p}{p^{j/2}}\,\delta(t-j\log p).
+ \label{eq:wave}
+\end{equation}
+The first two terms form the smooth background $W_{\rm reg}$ from the pole of $\zeta$ and its gamma factor. Each remaining term contributes $-(\log p)p^{-j/2}\phi(j\log p)$ to the time average. One can see the origin of both its time and its weight in the Euler product. For $\operatorname{Re}s>1$, $\log\zeta(s)=\sum_{p,j}p^{-js}/j$. Differentiation supplies a factor $\log p$ at every repetition. At $s=1/2-iE$, $p^{-js}=p^{-j/2}e^{iE j\log p}$ has exactly the phase that Fourier transformation in $E$ places at $t=j\log p$. The explicit formula justifies the passage to the critical line after averaging. A prime power thus marks a time in the collective evolution of the spectrum.
+
+To observe this structure in a Ramsey experiment, we need a density operator of trace one. Weights proportional to $(1+\gamma^2)^{-1}$ have a finite sum and leave a simple way to recover the wave trace. For a phase $e^{-it\gamma}$, the operation $1-\partial_t^2$ multiplies by exactly the factor $1+\gamma^2$ that the preparation divides out. The state is $\rho_R=(1+H^2)^{-1}/Q$, with $Q=\Tr(1+H^2)^{-1}$ finite.
+
+In Figure~\ref{fig:ramsey-readout} the reference qubit starts in an equal superposition. Its two branches apply $e^{-itH}$ and the identity, respectively. Since $\rho_R$ commutes with $H$, the system has the same density operator in either branch. What the qubit records in their interference is the relative phase of each energy eigenstate. Averaging those phases with the preparation probabilities gives its complex coherence
+\[
+ R(t)=\Tr(\rho_R e^{-itH})
+     =\frac{1}{Q}\sum_{\gamma}\frac{m_\gamma e^{-it\gamma}}{1+\gamma^2}.
+\]
+The sum converges absolutely. Opposite energies carry equal weights, so their imaginary parts cancel and the mean Pauli $X$ of the reference qubit equals $R(t)$. Restoring the factors $1+\gamma^2$ gives $(1-\partial_t^2)R=W/Q$ in the sense of distributions. Each negative impulse in \eqref{eq:wave} therefore contributes a positive impulse to $R''$. Integrating across $t_0=j\log p$ gives a jump in the slope of the measured coherence,
+\begin{equation}
+ R'(t_0^+)-R'(t_0^-)=\frac{\log p}{Q p^{j/2}} .
+ \label{eq:kink}
+\end{equation}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\linewidth]{figures/manuscript/ramsey-readout.pdf}
+\caption{The mean Pauli $X$ of the reference qubit gives $R(t)$ under controlled evolution of the signed system. Each stem gives the ideal jump in $R'(t)$ at $t=\log(p^j)$ from \eqref{eq:kink}. The labels identify the prime powers, including the first three powers of two.}
+\label{fig:ramsey-readout}
+\end{figure}
+
+\subsection*{Resolving the first prime time}
+
+The sharp corner requires arbitrarily high energies. For any state of finite mean absolute energy the differentiated spectral sum converges uniformly, making the slope continuous. In $\rho_R$ the normalization is finite, while the zero-counting law gives
+\[
+ \Tr(\rho_R|H|)=\frac{1}{Q}\sum_\gamma\frac{m_\gamma|\gamma|}{1+\gamma^2}=\infty .
+\]
+An energy cutoff $|\gamma|\le T$ rounds the corner. After renormalization the finite sum $R_T(t)$ is smooth, as Figure~\ref{fig:ramsey-corner} illustrates near $t_0=\log 2$. The discarded probability is $\epsilon_T=Q^{-1}\sum_{|\gamma|>T}m_\gamma/(1+\gamma^2)$, which is $O(\log T/T)$ by partial summation of the zero count. The ideal $R$ is a probability-weighted average of the retained and discarded coherences, each of magnitude at most one. Hence at every time
+\[
+  \sup_t |R_T(t)-R(t)|\le 2\epsilon_T .
+\]
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\linewidth]{figures/manuscript/ramsey-corner.pdf}
+\caption{Calculated Ramsey coherence near $t_0=\log 2$. Each curve uses the zero heights up to the stated cutoff and renormalizes the state. The three cutoffs retain 10, 108 and 649 pairs of energies, respectively. Vertical guides mark the three sampling times for $h=0.05$.}
+\label{fig:ramsey-corner}
+\end{figure}
+
+Even a rounded corner can be measured through the change in slope across a short time interval. The three samples $r_-,r_0,r_+$ in Figure~\ref{fig:ramsey-corner} are estimates of $R_T$ at $t_0-h,t_0,t_0+h$. For $0<h<\log(3/2)$, only the impulse at $\log 2$ lies in the window. The difference between the right and left slopes is $\widehat J_h=(r_+-2r_0+r_-)/h$. If each sample has absolute error at most $\delta$, its deviation from the ideal jump $J_2=\log 2/(Q\sqrt 2)$ obeys
+\[
+ |\widehat J_h-J_2|
+ \le h B_h+\frac{8\epsilon_T+4\delta}{h},\qquad
+ B_h=\sup_{|t-t_0|\le h}|R(t)-W_{\rm reg}(t)/Q|.
+\]
+For ideal samples this slope difference integrates $R''$ against a triangular weight of height one and area $h$. It therefore counts the full impulse $J_2$, with an error of at most $hB_h$ from the smooth curvature. Since $|R|\le1$, $B_h\le 1+\sup_{|t-t_0|\le h}|W_{\rm reg}(t)|/Q$. Smaller spacing reduces the curvature error while amplifying both the cutoff and the readout errors. Each coherence can differ from $R$ by at most $2\epsilon_T+\delta$, and the coefficients $1,-2,1$ in the slope difference have absolute values summing to four.
+
+For example, spacing $h=0.05$, absolute precision $\delta=10^{-3}$ per sample and cutoff $T=25\,000$ suffice for $25\%$ accuracy in the first jump. We can check the discarded weight directly from the chain response. For $|\gamma|>T\ge1$, $(1+\gamma^2)^{-1}\le2/(T^2+\gamma^2)$, so \eqref{eq:end} gives $Q=\operatorname{Im}m(i)$ and $\epsilon_T\le2\operatorname{Im}m(iT)/(QT)$ with $m(z)=-A'(z)/A(z)$. The logarithmic derivative in Appendix~\ref{app:boundary} gives $Q=0.046135928\ldots$ and hence $J_2>10.62$. Omitting its negative term $\zeta'/\zeta$ at $s=T+1/2$ yields $\epsilon_T<0.00719$. The smooth terms of \eqref{eq:wave} give $B_h<28.1$ on this window. Together these give an absolute error below $2.64<J_2/4$.
+
+This error budget assumes that the three mean coherences can be measured to the prescribed precision. The symmetric cutoff keeps $R_T(t)$ real, and each Pauli-$X$ shot returns $+1$ or $-1$ with mean $R_T(t)$. With $n$ independent shots at one time, Hoeffding's inequality~\cite{hoeffding} bounds the probability that the sample mean misses by more than $\delta$ by $2e^{-n\delta^2/2}$. For all three times the probability of any miss is at most $6e^{-n\delta^2/2}$. At $\delta=10^{-3}$, $9.6$ million shots per time thus suffice for the $25\%$ slope estimate with at least $95\%$ probability. Each shot requires a fresh preparation of the truncated state and one ideal controlled evolution under the signed $H$. Realizing those operations with the local couplings of $K$ remains open.
+
+\subsection*{Predicting the Ramsey signal from primes}
+The state $\rho_R$ was chosen so that differentiating the measured coherence reveals the prime impulses. A second choice lets us work in the other direction and predict the coherence itself from finite prime data. The smoothed prime count in the arithmetic proof~\cite{primeinput,primeguide} already assigns a zero $\rho=\tfrac12+i\gamma$ the weight $1/[\rho(1-\rho)]=1/(\tfrac14+\gamma^2)$. The input state with these probabilities is
+\[
+ \rho_*=\frac{(H^2+\tfrac14 I)^{-1}}{Z_*},\qquad
+ Z_*=\Tr(H^2+\tfrac14 I)^{-1}=2+\gamma_{\rm E}-\log(4\pi),
+\]
+where $\gamma_{\rm E}$ is Euler's constant. At time $t\ge0$ the required prime data enter through the smoothed excess. Writing $\Lambda(p^j)=\log p$ and $\Lambda(n)=0$ otherwise, this is
+\[
+ \mathcal E_\Lambda(t)=\sum_{n\le e^t}\Lambda(n)(e^t/n-1)-te^t+(1+\gamma_{\rm E})e^t .
+\]
+In the explicit formula for this excess, a zero contributes its phase with exactly the weight used in $\rho_*$. The residue calculation in Appendix~\ref{app:checks} therefore gives the mean Pauli $X$, $R_*(t)=\Tr(\rho_*e^{-itH})$, directly from the prime sum,
+\begin{equation}
+ R_*(t)=\frac{e^{-t/2}}{Z_*}
+ \left[\mathcal E_\Lambda(t)-\log(2\pi)
+       +\sum_{k=1}^\infty\frac{e^{-2kt}}{2k(2k+1)}\right].
+ \label{eq:primecoherence}
+\end{equation}
+The series over $k$ is the known contribution from the trivial zeros. At $t=\log 2$ the first prime ramp begins at height zero and \eqref{eq:primecoherence} gives $R_*(\log 2)=-0.3752242883\ldots$. To predict the ideal readout throughout any interval $0\le t\le t_{\max}$, it suffices to include the prime powers up to $e^{t_{\max}}$.
+
+\section{What follows from Alp\"oge's theta lift}
+\label{sec:lift}
+The Ramsey signal tells us how the signed zeta energies interfere once their evolution is available. Could a wave in Alp\"oge's proof itself oscillate at those energies? We have a way to test a proposed wave system. The response $m=-A'/A$ calculated at the end of the chain has a pole at every frequency the system would have to support. We begin with the integral in the proof. The wave it produces admits two motions. A shear displaces the wave along an orbit, so that a Fourier component acquires a phase. A dilation changes how quickly that phase advances. Together they let us probe the same wave over a range of scales.
+
+With test function $\Phi$ fixed, the last theta integral takes an input wave $\varphi$ to an output wave $F$,
+\[
+ F(g)=\int_{[U(W)]}\varphi(h)\,\theta_\Phi(g,h)\,dh .
+\]
+The integral runs over the input coordinate $h$, identifying points related by the rational symmetries of the input space. At an output point $g_0$ we record the signal $F(n_u g_0)$ as the shear parameter $u$ varies. Successive displacements add, $n_bn_u=n_{b+u}$. Rational displacements give equivalent points, leaving a compact group of shear parameters $[N]$ with uniform probability measure $du$. The analogue of extracting a tone from a periodic signal is to integrate against $\overline{\psi(cu)}$, the conjugate of a shear character of frequency $c$. Denote the resulting Fourier amplitude by $W_cF(g_0)$. Appendix~\ref{app:weights} establishes that some output and observation point have $W_cF(g_0)\ne0$ for a $c\ne0$. We can therefore measure the phase of a displacement $b$ by dividing the displaced amplitude by its value at rest~\cite{thetaoriginal},
+\begin{equation}
+ \frac{\int_{[N]}\overline{\psi(cu)}F(n_{u+b}g_0)\,du}
+      {W_cF(g_0)}=\psi(cb)=:z(b).
+ \label{eq:circle}
+\end{equation}
+On the real shear, $z(b)=e^{i\omega b}$ for some $\omega\ne0$. As $b$ varies, the phase runs around the circle. Invariance under shear translations induces uniform phase measure, so the powers $z^n$ form an orthonormal Fourier basis on the circle. This conclusion uses only the existence of one observable tone. The measured strengths of the harmonics depend on how we probe the wave.
+
+\subsection*{Counting and measuring the shear harmonics}
+In units of $|\omega|$, let $N z^n=n z^n$ be the momentum on the positive harmonics $n=1,2,\ldots$. On this space the $p$-fold covering $z\mapsto z^p$ sends $z^n$ isometrically to $z^{pn}$. Its image consists of harmonics with index divisible by $p$. Suppose the count we assign to a harmonic is preserved by each prime covering. Its weights then satisfy $a_{pn}=a_n$ for every prime $p$. Factorization of $n$ then gives $a_n=1$ once $a_1=1$. This prescription for counting harmonics defines the observable we will compare with the theta integral.
+
+A Gaussian probe at scale $r=e^x$ attenuates harmonic $n$ by $e^{-\pi r^2n^2}$. Scanning $r$ varies the probe applied to the fixed kinetic energy $N^2$. A general rescaling of $N$ itself would change its discrete spectrum and hence cannot be a unitary conjugation. Summing the probe response with the prescribed weights gives the heat trace
+\begin{equation}
+ h(r)=\Tr e^{-\pi r^2N^2}=\sum_{n=1}^\infty e^{-\pi n^2r^2}.
+ \label{eq:heatcount}
+\end{equation}
+The choice of $\pi$ makes the Gaussian its own Fourier transform. Restoring the constant mode and both momentum signs lets us apply Poisson summation on the full integer lattice,
+\[
+ 1+2h(r)=r^{-1}\,[1+2h(1/r)] .
+\]
+This relation is especially sensitive to the count at high harmonics. As $r$ decreases, modes out to order $1/r$ pass through the probe, and their combined response grows as $h(r)\sim1/(2r)$.
+
+How much of that response can a detector recover at one point in the theta space? Fix the level, representation type, smooth evaluation and point $g_0$. The space of independent input copies at this stage is finite dimensional. By exciting an orthonormal basis of inputs and summing the output powers, we obtain an intensity independent of that basis. If $T$ is the lift and $F_j$ are its evaluated outputs on the basis, then the intensity at frequency $nc$ is $w_n=\sum_j|W_{nc}F_j(g_0)|^2$. Equivalently $w_n=\|T^*u_{nc}\|^2$, where $u_q$ represents evaluation of the coefficient at $q$ and the reverse lift $T^*$ is the adjoint for the Petersson inner product~\cite{stagebasis}. Parseval's identity on the shear orbit bounds the total power,
+\begin{equation}
+ 0<M:=\sum_{n\ge1}w_n\ \le\
+ \sum_j\int_{[N]}|F_j(n_b g_0)|^2\,db<\infty .
+ \label{eq:power}
+\end{equation}
+The detected tone at $c$ ensures $M>0$, whereas equal positive power at all multiples of $c$ would make $M$ infinite. This finite power leaves a measurable discrepancy between reciprocal scales. Include any finite constant-mode weight $w_0\ge0$ and form $\vartheta_w(r)=w_0+2\sum_{n\ge1}w_ne^{-\pi n^2r^2}$. Smoothness gives $\sum n^2w_n<\infty$, so opening the probe at small $r$ admits power $w_0+2M+O(r^2)$. At reciprocal scale $1/r$ only the constant mode survives to this order. Their difference is
+\begin{equation}
+ \vartheta_w(r)-r^{-1}\vartheta_w(1/r)
+    =-w_0/r+w_0+2M+O(r^2).
+ \label{eq:defect}
+\end{equation}
+Removing the constant mode still leaves the finite discrepancy $2M$.
+
+One might hope that measurements at increasing automorphic levels would gradually fill in the missing power. A related estimate in the proof concerns period maps $B_i$ into a common $D$-dimensional space. There the distribution of power of $S_{\rm per}=\sum_i c_i B_i B_i^*$, with $c_i>0$, is controlled through the relative variance of its eigenvalues, $D\Tr(S_{\rm per}^2)/(\Tr S_{\rm per})^2-1$~\cite{zhangperiods,primeguide}. Small variance is compatible with a persistent blind direction. If one eigenvalue vanishes and the other $D-1$ are equal and positive, the variance is $1/(D-1)$ and tends to zero even if the blind direction stays fixed. Using this estimate for our detector would first require identifying its evaluation at each $nc$ with a vector $v_n$ in the period space. Even a scalar response $S_{\rm per}=\mu I$ would give that vector power $\mu\|v_n\|^2$. Recovering \eqref{eq:heatcount} in a limit would require control of those powers at each fixed $n$, together with the contribution of the Gaussian-weighted tail.
+
+The lift does give an exact way to measure each term of \eqref{eq:heatcount}. Instead of looking for all harmonics at the same point, follow the original tone as its frequency changes under dilation. The rational dilation $d(a)$ takes a shear displacement $b$ to $a^2b$. At setting $n$, the coefficient at frequency $n^2c$ and point $d(1/n)g_0$ therefore equals the original $W_cF(g_0)$ by rational invariance. Its phase under real shear now advances as $e^{in^2\omega b}$. Averaging that phase over $b$ with a Poisson kernel of width $\pi r^2/|\omega|$ gives exactly $e^{-\pi n^2r^2}$ (Appendix~\ref{app:weights}). Figure~\ref{fig:moving-detector} shows why the finite-power bound poses no obstacle here. Each row follows the same coefficient at a different setting. Summing the readings with one count per setting implements the trace prescription.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\linewidth]{figures/manuscript/moving-detector.pdf}
+\caption{The fixed detector measures the power carried by different harmonics at one point. At the first three moving settings the initial coefficient is the same, while the phase completes $1$, $4$ and $9$ cycles over one fundamental shear period. Poisson averaging gives the Gaussian response in each row. The sum gives each setting unit weight.}
+\label{fig:moving-detector}
+\end{figure}
+
+\subsection*{From the heat trace to the boundary response}
+We can now read the boundary response from the trace by asking how it varies with scale. Integrating $h(r)$ against $r^s\,dr/r$ assigns the $n$th harmonic a factor $n^{-s}$, as the substitution $r\mapsto nr$ shows. The common Gaussian integral supplies the other factor, giving the Mellin transform $\tfrac12\pi^{-s/2}\Gamma(s/2)\zeta(s)$ for $\operatorname{Re}s>1$. To reach the energy axis, write $r=e^x$. At $s=\tfrac12-iE$ the transform would be the Fourier transform of $v(x)=e^{x/2}h(e^x)$. There is a convergence problem at small scales. As $x\to-\infty$, the growing number of harmonics makes $v(x)$ grow like $e^{-x/2}/2$.
+
+Reciprocity tells us exactly what to remove. In the logarithmic coordinate the Poisson identity reads
+\[
+ v(x)-v(-x)=\tfrac12(e^{-x/2}-e^{x/2}).
+\]
+The operator $\partial_x^2-\tfrac14$ annihilates both exponentials, so applying it to $v$ leaves an even pulse. At positive $x$ the Gaussian sum and its derivatives decay rapidly. Evenness now gives the same decay at negative $x$, where the original transform failed. We can also see what the operation does to the Mellin amplitude. In the convergent half-plane, two integrations by parts against $e^{(s-1/2)x}$ multiply that amplitude by $(s-1/2)^2-1/4=s(s-1)$. This supplies exactly the missing factor in the completion \eqref{eq:completion}. Continuing to the energy axis gives
+\begin{equation}
+ k(x)=(\partial_x^2-\tfrac14)\,[e^{x/2}h(e^x)],\qquad
+ \widehat k(E)=A(E),\qquad \mathcal F[-ix k(x)](E)=A'(E).
+ \label{eq:pulse}
+\end{equation}
+The first record is the Fourier amplitude of the pulse itself. For the second, each reading at scale $r$ is weighted by $-i\log r=-ix$. This inserts the factor that differentiating $e^{-iEx}$ with respect to $E$ would produce. Taking the negative ratio of the second record to the first therefore gives $m=-A'/A$, the response measured at the chain's end site in \eqref{eq:end}.
+
+Logarithmic scale also has a dynamical meaning inside the lift. The continuous dilation $n_b\mapsto n_{e^t b}$ preserves the sign of the real shear frequency $q$. On each occupied frequency ray it acts by translation of $x=-\log(|q|/|\omega|)$. The affine-group representation on that ray is $L^2(\mathbb R,dx;\mathcal M)$, with multiplicity space $\mathcal M$ accounting for independent copies~\cite{affine}. Choosing a unit vector in $\mathcal M$ selects one scalar channel with the lift's inner product. In its Fourier representation the generator of free dilation is multiplication by $E$, so the underlying frequency variable is continuous. We can apply the two filters $k(x)$ and $xk(x)$ to this wave directly in the theta integral. A real shear multiplies a frequency component by $e^{ibq}$, and averaging over $b$ with the inverse Fourier transform of the desired multiplier applies that multiplier at $q$. Absolute summability of the theta terms and decay of the cuspidal input justify the interchange of integrals~\cite{thetamixed}. What remains is to understand how the poles of the measured response become discrete standing-wave frequencies.
+
+\subsection*{Flux, reflection and the wall}
+What kind of medium could return the response $m$ when driven at one end? Section~\ref{sec:chain} used the bounded spectral coordinate $\lambda=(\gamma^2+u)^{-1}$ to obtain a nearest-neighbor chain. To describe a wave propagating along a line, we use its signed frequency $z$ directly. Each positive ordinate in \eqref{eq:end} contributes $m_\gamma[(\gamma-z)^{-1}+(-\gamma-z)^{-1}]$ to $m(z)$. Both terms have positive imaginary part for $\operatorname{Im}z>0$. The sign comes from the positive spectral weights of the chain and is the condition for $m$ to be the boundary response of a passive line.
+
+The inverse theorem for canonical systems constructs that line. Its two-component wave $Y(\ell,t)$ obeys a first-order equation with a real symmetric matrix $G(\ell)\ge0$. Normalizing $\Tr G=1$ fixes the length coordinate $\ell$, after which $m$ determines $G$ uniquely almost everywhere~\cite{canonicalphysics}. Position $\ell$ in this medium is distinct from the logarithmic scale $x$ used to obtain $m$. The equation of motion is
+\begin{equation}
+ iG(\ell)\,\partial_tY=J\partial_\ell Y,\qquad
+ J=\begin{pmatrix}0&-1\\1&0\end{pmatrix}.
+ \label{eq:localwave}
+\end{equation}
+What flows along the line follows by multiplying \eqref{eq:localwave} by $Y^\dagger$ and using the adjoint equation. For a regular packet this gives
+\[
+ \partial_t(Y^\dagger GY)+\partial_\ell j=0,\qquad j=iY^\dagger JY.
+\]
+Here $Y^\dagger GY$ is the nonnegative density stored in the line. To separate flux entering and leaving the endpoint, we diagonalize its current form. At $\ell=0$ the amplitudes are
+\begin{equation}
+ a=\frac{Y_1-iY_2}{\sqrt2},\qquad b=\frac{Y_1+iY_2}{\sqrt2},
+ \qquad j=|a|^2-|b|^2 .
+ \label{eq:portflux}
+\end{equation}
+Thus $a$ carries flux into the line and $b$ carries it back to the port.
+
+With time dependence $e^{-izt}$ the wave equation reads $JY'=zGY$. For $\operatorname{Im}z>0$, finiteness of $\int_0^\infty Y^\dagger GY\,d\ell$ fixes the boundary direction of the solution. In the normalization $Y_1(0)=1$, its second component is $m(z)$, the Weyl response of the line. The incident flux minus the returning flux is then $2\operatorname{Im}m(z)$, which explains the sign required of the response. Substituting these boundary values in \eqref{eq:portflux} gives the complex reflection amplitude
+\begin{equation}
+ \frac{b}{a}=\Theta(z)=\frac{1+i m(z)}{1-i m(z)}
+             =\frac{A(z)-iA'(z)}{A(z)+iA'(z)} .
+ \label{eq:theta}
+\end{equation}
+The amplitude is contractive in the upper half-plane. At real frequencies its modulus is one, with common factors canceled at multiple zeros. A lossless wall imposes a fixed phase relation $b=\alpha a$, $|\alpha|=1$. A standing wave must satisfy both the material response and the wall condition, so its frequency solves $\Theta(E)=\alpha$. The choice $\alpha=-1$ forces $Y_1(0)=0$ and selects poles of $m$. The choice $\alpha=+1$ forces $Y_2(0)=0$ and selects its zeros, where $A'(E)=0$ and $A(E)\ne0$. These two wall phases preserve the pairing of frequencies $E$ and $-E$, since the evenness of $A$ gives $\Theta(-E)=\overline{\Theta(E)}$ on the real axis. Flux conservation allows either sign.
+
+\subsection*{Which wall the static response selects}
+An additional measurement can distinguish the walls. Before closure the scalar dilation has the continuous generator $Df(E)=Ef(E)$ on $L^2(\mathbb R,dE)$. Its resolvent at $i\eta$ gives the response to a zero-frequency drive with damping $\eta>0$. To measure this response in the channel specified by the reflection amplitude, we use the orthogonal projection $P_\Theta$ onto $H^2\ominus\Theta H^2$~\cite{suzukiglobal}. Here $H^2$ is the space of upper-half-plane Hardy amplitudes. The projection retains the part orthogonal to every amplitude of the form $\Theta f$ with $f\in H^2$.
+
+The free resolvent multiplies a packet by $(E+i\eta)/(E^2+\eta^2)$. Its real part samples the dispersion on both sides of zero. Its imaginary part tends to zero at each $E\ne0$, yet the narrowing peak retains area $\pi$. For a packet $f$ in the selected channel the absorptive response therefore has the limit
+\[
+ \int_{\mathbb R}\frac{\eta\,|f(E)|^2}{E^2+\eta^2}\,dE
+     \longrightarrow \pi|f(0)|^2 .
+\]
+Only one complex amplitude, $f(0)$, survives. Within this channel evaluation at zero is an overlap with a single vector (Appendix~\ref{app:boundary}), which accounts for the rank of the residual absorption. A self-adjoint inverse has real expectation in every packet. We therefore match its static response to the dispersive part,
+\begin{equation}
+ H_{\rm s}^{-1}=C=\lim_{\eta\downarrow0}
+       P_\Theta\frac{D}{D^2+\eta^2}\bigg|_{\operatorname{ran}P_\Theta}.
+ \label{eq:static}
+\end{equation}
+Appendix~\ref{app:boundary} makes the comparison before taking the self-adjoint part. In operator norm the projected free resolvent approaches the inverse of the $\alpha=-1$ extension plus precisely the imaginary rank-one term. Thus \eqref{eq:static} singles out the wall $Y_1(0)=0$. The projection and the prescription to match the static response are the inputs to this selection.
+
+This wall has a standing wave at every signed zero. At a zero $\gamma$ of order $d$, $m(E)=d/(\gamma-E)+O(1)$, so the boundary direction tends to $(0,1)^{\mathrm T}$. Conversely, a crossing at $\Theta=-1$ requires a pole of $m$. The scalar channel supplies one eigenline at each distinct zero, irrespective of its order. The order survives in the slope of the reflected phase, since \eqref{eq:theta} gives $|\Theta'(\gamma)|=2/d$. Appendix~\ref{app:boundary} uses this integer $d$ to place $d$ orthogonal copies of the eigenline in the dilation space. The resulting signed Hamiltonian and the signed Hamiltonian reconstructed from the chain have matching energies and multiplicities. Matching their eigenbases identifies the two operators. An identification of the experiments would also have to carry one set of preparations and observables to the other.
+
+The closed response has a signature at the open port. Sort an incoming packet by its reflection phase and retain the energies for which $|1+\Theta(E)|<\epsilon$, with $0<\epsilon<2$. For every unit packet in the selected channel the phase is uniformly distributed, so the accepted fraction is the angular fraction $p_\epsilon=2\arcsin(\epsilon/2)/\pi$ (Figure~\ref{fig:phase-window}, Appendix~\ref{app:boundary}). Its independence of the packet makes the selection an isometry after division by $\sqrt{p_\epsilon}$. At $z=i$ the conditional resolvent differs from $(H_{\rm s}-i)^{-1}$ by $O(\epsilon^2)$ in operator norm. Averaging over an arc symmetric about $-1$ cancels the first-order variation. Narrowing that arc costs $1/p_\epsilon\sim\pi/\epsilon$ independent preparations per accepted packet on average.
+
+\subsection*{What the response determines about the medium}
+There are two properties of the line that we can deduce without reconstructing its full profile. The symmetry of the response fixes the principal axes of the energy density throughout the medium. Its high-frequency behavior fixes the average density at the wall. In the coordinates of \eqref{eq:portflux},
+\begin{equation}
+ G(\ell)=\begin{pmatrix}\mathcal C(\ell)&0\\0&1-\mathcal C(\ell)\end{pmatrix}
+ \ \text{a.e.},\qquad
+ \lim_{h\downarrow0}\frac1h\int_0^h G(\ell)\,d\ell
+     =\begin{pmatrix}1&0\\0&0\end{pmatrix}.
+ \label{eq:medium}
+\end{equation}
+To see the symmetry, let $S=\operatorname{diag}(1,-1)$. Since $JS=-SJ$, replacing $Y(\ell,z)$ by $S Y(\ell,-z)$ changes $G$ to $SGS$ and the response to $-m(-z)$, using continuation to the lower half-plane. The evenness of $A$ makes $m$ odd. The transformed line therefore has the same response. Uniqueness in the trace-normalized coordinate gives $G=SGS$ almost everywhere, which forces the off-diagonal entries to vanish. Positivity gives $0\le\mathcal C\le1$.
+
+The components can now be read as a voltage $V=Y_1$ and a current $I=-iY_2$. In these variables \eqref{eq:localwave} becomes the lossless transmission-line equations,
+\begin{equation}
+ \partial_\ell V=-\mathcal L(\ell)\,\partial_t I,\qquad
+ \partial_\ell I=-\mathcal C(\ell)\,\partial_t V,\qquad
+ \mathcal L=1-\mathcal C .
+ \label{eq:line}
+\end{equation}
+In normalized units $\mathcal C$ and $\mathcal L$ are the capacitance and inductance per unit length. The stored density is $\mathcal C|V|^2+\mathcal L|I|^2$, and the flux is $2\operatorname{Re}(\bar V I)$. At unit reference impedance the incident and reflected amplitudes are $(V+I)/\sqrt2$ and $(V-I)/\sqrt2$. A short circuit enforces $V(0)=0$, giving the voltage reversal $b=-a$ selected by static matching.
+
+The endpoint limit in \eqref{eq:medium} concerns an average over a shrinking length. Its arithmetic origin is the high-frequency behavior of $m$. Inside closed angular sectors of the upper half-plane, the logarithmic derivative of the gamma factor supplies the leading term and the prime contribution becomes exponentially small. Appendix~\ref{app:boundary} relates that asymptotic to the averaged coefficients at the wall. The inductance averages to zero there, yet its integral over every initial interval is positive. A layer of exactly zero inductance extending any positive distance would give a response growing at least linearly along the imaginary frequency axis, faster than the logarithmic growth of $m$. On the real axis the individual resonances persist. The full spatial profile of the measurable coefficients in \eqref{eq:line} and the interpretation of $\ell$ in the theta space remain to be determined.
+
+\subsection*{A finite circuit for the arithmetic reflection}
+A finite-band port measurement can be reproduced without knowing the distributed capacitance and inductance. The $N$-site chain of Section~\ref{sec:chain} already gives a rational approximation $m_N$ in \eqref{eq:end}. A chain eigenvalue $\lambda_j$ fixes the location of a resonance, while its end-site detection probability $\nu_j$ fixes the strength. With Laplace frequency $\sigma=-iz$ and zeta argument $s=1/2+\sigma$, the current-to-voltage ratio is
+\begin{equation}
+ Y_N(\sigma)=-i m_N(i\sigma)=\sum_{j=1}^N\frac{d_j\sigma}{\sigma^2+\omega_j^2},
+ \qquad \omega_j^2=1/\lambda_j-u,\qquad d_j=2S\nu_j/\lambda_j .
+ \label{eq:branches}
+\end{equation}
+A series branch with inductance $L_j=1/d_j$ and capacitance $C_j=d_j/\omega_j^2$ has exactly the admittance given by the $j$th term. In parallel all branches see the same voltage and their currents add, giving $Y_N$. Every component is positive. At unit reference impedance the measurable voltage reflection is $(1-Y_N)/(1+Y_N)$.
+
+Figure~\ref{fig:resonators} tests this circuit on $10\le E\le30$, a band containing the first three positive zeta frequencies. A probe at $z=E+i$ weights the impulse response by $e^{-t}$ before Fourier analysis. For an absolute tolerance of $10^{-3}$ on the complex reflection amplitude, eleven branches suffice throughout the band. The uniform error is below $2.26\times10^{-4}$, while each of the first ten chain truncations exceeds the tolerance at the upper band edge. The comparison tests what a detector at the port would see. Appendix~\ref{app:circuit} gives the component values and includes their rounding in the bound.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\linewidth]{figures/manuscript/resonators.pdf}
+\caption{Eleven series LC branches in parallel at the port. The solid curve joins 2,001 values of the reflection-amplitude error at $z=E+i$, computed with the rounded parameters in Table~\ref{tab:resonators}. The dashed bound includes the interpolation allowance between samples.}
+\label{fig:resonators}
+\end{figure}
+
+\section{Physical interpretation}
+Suppose we are given the chain couplings and can observe only the end site. What would count as identifying a zero in such an experiment? A resolved line at $\lambda$ determines the positive energy $\gamma=\sqrt{1/\lambda-u}$. Its intensity carries a second piece of information. Each state at that energy contributes a known weight $\lambda/S$, so dividing the observed weight $w_\gamma$ by $\lambda/S$ tells us how many states to assign to the level. A double zero, for example, produces a single frequency, yet its factor must appear twice in the determinant \eqref{eq:det}. That information is available at the end site because the chain reproduces the moments extracted from the completed partition function of the prime gas. The critical-line theorem is what allows those moments to define a positive norm. A local symmetry that would explain the inferred multiplicities remains to be found.
+
+Relabelling a line on a spectrometer leaves its oscillation rate unchanged. The local hopping still advances its phase at $\lambda$. Making it oscillate at $\gamma$ requires the transformed generator $H_{\rm cyc}$, which is nonlocal in the site basis. This distinction matters most for the lines near $\lambda=0$. They represent arbitrarily high zeta energies, enough to give the end site an infinite second moment for $H_{\rm cyc}$. In the signed Ramsey experiment those high frequencies again matter. With finite mean absolute energy the phase sum could be differentiated term by term and its slope would be continuous. The sharp prime-time corner is possible because the ideal preparation has infinite mean absolute energy. A finite bandwidth rounds the corner, so the finite measurement in Section~\ref{sec:primewave} compares the slopes over a specified time step. For the preparation $\rho_*$ there is also a prediction for the qubit reading between corners. At time $t$ the ramp for a prime power $n$ has entered the arithmetic sum precisely when $n\le e^t$ in \eqref{eq:primecoherence}.
+
+A change of slope at $\log p$ can occur while the occupied modes still have different phases. In fact their coherence has magnitude strictly below one at that time, and a dilation trajectory at fixed automorphic level cannot close there (Appendix~\ref{app:checks}). There is an exact sense in which the scale does return. Scaling every frequency in $\omega\mathbb Z[1/p]$ by $p$ permutes the set, since division by $p$ is allowed as well. On the original circle, scaling by $p$ picks out just the harmonics divisible by $p$. This is why the same shift by $\log p$ enters the subtraction that isolates their complement in \eqref{eq:sieve}.
+
+The transmission line gives a spatial interpretation to the poles already present in the chain response. At its open port, $m$ determines how an incident wave is reflected. At a closed port the reflected wave must also satisfy the wall condition, so changing the wall can move the standing-wave energies even while the medium stays the same. Matching the static dispersive response in the selected channel picks the short circuit, for which each distinct pole of $m$ gives a standing wave. A detector confined to the damped band of Appendix~\ref{app:circuit} can see the same reflection, to the stated accuracy, from a finite set of resonators. To infer a property of the material itself, such as the vanishing average inductance next to the wall in \eqref{eq:medium}, we used the high-frequency behavior as well.
+
+The question left by this construction arises before any wall is installed. A shear wave in the lift supplies a measurable phase, and moving the detector with the frequency recovers each term of the Gaussian sum. A fixed detector has only finite total harmonic power. To obtain $m$ we count each moving-detector setting once, or approach that count with calibrated packets of increasing kinetic energy (Appendix~\ref{app:weights}). Equal counting fixes the open response. An intrinsic Hilbert--P\'olya explanation on these theta spaces would have to say why the dynamics assigns that count to the measurements and why it selects the channel and the static matching that turn the response into a spectrum.
+
+\appendix
+\addtocontents{toc}{\protect\addvspace{3pt}}
+\section{The static limit and its boundary condition}\label{app:boundary}
+
+A wall with reflection phase $\alpha$ admits standing waves at the energies where $\Theta(E)=\alpha$. To find which wall satisfies the static matching condition \eqref{eq:static}, we compute the response of a freely dilating packet at zero frequency. Damping by $\eta>0$ makes the free resolvent well defined. We project its output back onto the channel in which the packet was prepared and then take $\eta$ to zero.
+
+The projection acts on energy amplitudes. Let $H^2$ denote the space of analytic functions in the upper half-plane with uniformly bounded horizontal $L^2$ norms. Their boundary values on the real axis determine the functions, and the boundary norm uses the measure $dE$. Multiplication by $\Theta$ preserves this norm because $|\Theta(E)|=1$. In Suzuki's scalar model space, $\mathcal K=H^2\ominus\Theta H^2$, a packet is orthogonal to every amplitude $\Theta g$ with $g\in H^2$~\cite{suzukiglobal}. Write $P=P_\Theta$ for the projection onto $\mathcal K$.
+
+For a packet $f\in\mathcal K$, evaluation at a complex frequency $w$ can be written as an overlap, $f(w)=\langle f,k_w\rangle$, with the inner product linear in its first entry. The vector that represents this evaluation is
+\[
+ k_w(z)=\frac{i}{2\pi}\frac{1-\overline{\Theta(w)}\Theta(z)}{z-\bar w}.
+\]
+We compare the projected response $R_\eta=P(D-i\eta)^{-1}|_{\mathcal K}$ with the resolvent of the self-adjoint extension $B$ having boundary phase $-1$. Its eigenbasis consists of the normalized evaluation vectors $k_\gamma$ at the crossings $\Theta(\gamma)=-1$~\cite{suzukiglobal}. For the free dilation, $(D-i\eta)^{-1}$ simply multiplies a packet by $1/(E-i\eta)$. Subtracting $f(i\eta)$ from its numerator cancels the pole in the upper half-plane. The divided difference $[f(z)-f(i\eta)]/(z-i\eta)$ belongs to $\mathcal K$ by backward-shift invariance. The portion removed, $f(i\eta)/(E-i\eta)$, belongs to the lower Hardy space and is orthogonal to $\mathcal K$. Thus the divided difference is exactly $R_\eta f$. Writing $b_\eta=\Theta(i\eta)$, the remaining correction for the closed wall is
+\[
+ [(B-i\eta)^{-1}-R_\eta]f(z)=
+ \frac{f(i\eta)}{-1-b_\eta}\frac{\Theta(z)-b_\eta}{z-i\eta}.
+\]
+The correction depends on the incoming packet through the single amplitude $f(i\eta)$. To verify the formula, add its right-hand side to $R_\eta f$ and evaluate the sum at a crossing $\gamma$. The result is $f(\gamma)/(\gamma-i\eta)$, the component prescribed by the resolvent of $B$. The corrected vector belongs to $\mathcal K$, and these components determine it in the eigenbasis.
+
+As $\eta\downarrow0$, the evaluation vectors $k_{i\eta}$ converge in norm to $k_0$ by the kernel formula and analyticity of $\Theta$ near zero, where $\Theta(0)=1$. The other vector in the correction, the divided difference of $\Theta$, tends in $L^2(dE)$ to $(\Theta(E)-1)/E=2\pi i k_0(E)$. Analyticity controls the convergence near zero and $2/|E|$ bounds the tails. Since zero belongs to the resolvent set of $B$, both factors in the rank-one correction have limits in norm, and
+\[
+ R_\eta\longrightarrow B^{-1}
+       +i\pi\langle\,\cdot\,,k_0\rangle k_0 .
+\]
+The imaginary part of this limit has expectation $\pi|f(0)|^2$. Thus only the packet amplitude at zero energy contributes to the absorptive part of the projected response. Taking the self-adjoint part leaves the dispersive response $C=B^{-1}$ in \eqref{eq:static}. An inverse fixes its operator on the range of that inverse. Hence the matching condition gives $H_{\rm s}=B$ with domain $\operatorname{ran}C$ and fixes the wall phase at $-1$. The static response itself acts as
+\[
+ (Cf)(z)=\frac{f(z)-[1+\Theta(z)]f(0)/2}{z}.
+\]
+One can see the standing wave in this formula. At a crossing $\Theta(\gamma)=-1$, the function $f_\gamma(z)=(1+\Theta(z))/(z-\gamma)$ is proportional to $k_\gamma$. Substitution gives $C f_\gamma=f_\gamma/\gamma$, so the wall Hamiltonian assigns this state energy $\gamma$.
+
+Each such scalar state spans one eigenline. The measured phase slope gives the desired multiplicity $m_\gamma=2/|\Theta'(\gamma)|$. To build the additional copies in the dilation space, retain a state in copy $j$ whenever $m_\gamma>j$, beginning with $j=0$. The spectral projection $Q_j$ of $(2/|\Theta'|)(H_{\rm s})$ onto $(j,\infty)$ implements this rule. The spaces $\Theta^j Q_j\mathcal K$ are mutually orthogonal since multiplication by $\Theta$ preserves norms and $\mathcal K\perp\Theta H^2$. On the $j$th summand set $H(\Theta^j f)=\Theta^jH_{\rm s}f$. Its direct-sum domain consists of sequences with $f_j\in Q_j\mathcal K\cap\operatorname{dom}H_{\rm s}$ and $\sum_j\|H_{\rm s}f_j\|^2<\infty$. This gives a self-adjoint operator in which energy $\gamma$ occurs in exactly the first $m_\gamma$ summands.
+
+\subsection*{The averaged coefficients at the wall}
+The behavior of the line close to its port is encoded in the response at high complex frequency. For $s=1/2-iz$, differentiating \eqref{eq:completion} separates the gamma factor from the prime contribution,
+\[
+ m(z)=i\frac{\xi'(s)}{\xi(s)}
+   =i\left(\frac1s+\frac1{s-1}-\tfrac12\log\pi
+      +\tfrac12\frac{\Gamma'(s/2)}{\Gamma(s/2)}
+      +\frac{\zeta'(s)}{\zeta(s)}\right).
+\]
+As $|z|\to\infty$ in any closed angular sector strictly inside the upper half-plane, $\operatorname{Re}s$ grows at least proportionally to $|z|$. The prime series makes $\zeta'(s)/\zeta(s)$ exponentially small there. Stirling's formula for the gamma derivative therefore gives
+\[
+ m(z)=\tfrac i2\log\!\left(\frac{s}{2\pi}\right)+O(|s|^{-1})
+\]
+with the principal logarithm. Thus $m$ grows logarithmically in these sectors. To use a theorem stated for a finite limiting response, we rotate the two boundary amplitudes by $J$. This preserves the canonical wave equation and replaces $G$ by $\widetilde G=JGJ^{\mathrm T}$. The boundary vector $(1,m)^{\mathrm T}$ rotates into $(-m,1)^{\mathrm T}$, so the ratio of its second component to its first is now $\widetilde m=-1/m$, which tends to zero.
+
+Eckhardt, Kostenko and Teschl use the same conventions for $J$ and the Weyl vector~\cite[Eqs.~(2.2), (2.6)]{canonicalphysics}. For a trace-normalized system, their high-energy theorem relates a finite sectorial limit of the response to the average of the coefficient matrix over a shrinking interval adjacent to the endpoint~\cite[Theorem~3.1 and Eq.~(2.23)]{canonicalphysics}. In the rotated coordinates a limiting response of zero corresponds to the constant matrix $\operatorname{diag}(0,1)$. Rotating the average back gives \eqref{eq:medium}, with capacitance tending to one and inductance to zero in this averaged sense.
+
+A layer of positive width with zero inductance would leave a different signature. If the endpoint matrix persisted to $\ell=h>0$, then $Y_1'=0$ and $Y_2'=-zY_1$ throughout the layer. Starting with $(1,m(z))^{\mathrm T}$ gives $(1,m(z)-hz)^{\mathrm T}$ at its far edge. The second component is the Weyl response of the remaining half-line and must have nonnegative imaginary part for $\operatorname{Im}z>0$. At $z=iy$ this would require $\operatorname{Im}m(iy)\ge hy$, while the logarithmic asymptotic gives $\operatorname{Im}m(iy)/y\to0$. Hence there is no constant initial layer. Since $\mathcal L=1-\mathcal C\ge0$, its integral $\int_0^h\mathcal L(\ell)\,d\ell$ is positive for every $h>0$.
+
+\subsection*{Selecting a narrow phase interval}
+
+Once the wall phase has been specified, an open-port measurement can approximate its resolvent. For each energy, the reflection amplitude $\Theta(E)$ is a point on the unit circle. Accept a packet component at energy $E$ when this point lies within chord distance $\epsilon$ of $-1$, that is, when $E\in A_\epsilon=\{E:|1+\Theta(E)|<\epsilon\}$ with $0<\epsilon<2$.
+
+The energy distribution of a unit packet $f\in\K$ depends on $f$, yet its reflection phase has uniform angular distribution. Indeed the $n$th Fourier moment of the phase under $|f(E)|^2dE$ is $\langle\Theta^n f,f\rangle$. For $n\ge1$ it vanishes because $\Theta^n f\in\Theta H^2$ and $f\in\K$. Negative moments vanish by conjugation. The accepted arc has angular half-width $\delta=2\arcsin(\epsilon/2)$, so its share of the full circle and the corresponding normalized packet are
+\[
+ p_\epsilon=\delta/\pi,\qquad
+ J_\epsilon f=p_\epsilon^{-1/2}\,1_{A_\epsilon}f .
+\]
+The probability is independent of the incoming unit packet. Thus $J_\epsilon$ is an exact isometry from $\K$ into $L^2(\mathbb R,dE)$. The arc in Figure~\ref{fig:phase-window} illustrates the acceptance rule.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\linewidth]{figures/manuscript/phase-window.pdf}
+\caption{Postselection about the prescribed phase $-1$. At chord cutoff $\epsilon=1$ the accepted arc has angular half-width $\delta=\pi/3$, so one third of the packets are accepted on average. The curve gives the probability for any unit packet in the selected channel.}
+\label{fig:phase-window}
+\end{figure}
+
+To calculate what the accepted packets measure, let $B_\alpha$ be the extension whose wall phase is $\alpha$. Disintegrating the spectral measure of $D$ by the value of $\Theta(E)$ decomposes the open response into fixed-phase resolvents~\cite{aleksandrov}. On conditioning, only phases along the accepted arc contribute, with equal angular weight,
+\[
+ J_\epsilon^*(D-i)^{-1}J_\epsilon
+ =\frac1{2\delta}\int_{-\delta}^{\delta}
+        (B_{-e^{i\theta}}-i)^{-1}\,d\theta .
+\]
+For $z=i$ the wall phase enters the rank-one resolvent correction through the factor $1/(\alpha-\Theta(i))$. Since $|\Theta(i)|<1$, the correction is analytic in $\alpha$ near $-1$. Its term linear in $\theta$ averages to zero on the symmetric arc, leaving an operator-norm error $O(\epsilon^2)$ relative to $(\HH-i)^{-1}$. Thus narrowing the window improves the conditional resolvent at this fixed complex frequency, at a mean cost of $1/p_\epsilon\sim\pi/\epsilon$ independent preparations per accepted packet.
+
+\section{The shear component and its measured intensity}\label{app:weights}
+\subsection*{A nonzero shear component of a theta integral}
+
+To measure the phase in \eqref{eq:circle}, we need an output $F$ of the final theta integral and a Fourier coefficient $W_cF(g_0)\ne0$ at a nonzero frequency. A wave could have positive norm and still be constant along the orbit we observe. A rank estimate will give us a nonzero wave. To rule out invariance under a right shear, we compare that wave with its translates and show that their overlap decays. Rational invariance then lets us test the left shear sampled by the detector.
+
+All three steps must concern the same member of the family in Alp\"oge's proof. For a primitive Dirichlet character, the source constructs a family subject to any prescribed common lower bounds. The reference space has positive rank, and at sufficiently large scales the selected input subspace maps onto it. At these scales the same selection rule supplies a real representation and a comparison map for each eligible member. The set of eligible indices is still nonempty above the common thresholds, so we fix one such index throughout~\cite{shearfamily,shearrow,shearjoin}.
+
+The reference space provides a finite-dimensional test for a nonzero theta output. Its vectors, called \emph{rows}, embed in the comparison space by a map that multiplies norms by a positive constant. For an input with coordinates in the ground field, the image of the theta chain in this comparison space is a nonzero scalar times its embedded row. There is an input of this kind with a nonzero row. Indeed, the coordinate map has the selected input subspace in its range, and this subspace maps onto the positive-rank reference space. If every standard coordinate vector gave a zero row, their span would as well. At least one standard vector therefore detects a nonzero output of the theta chain before projection~\cite{shearrow,shearjoin}.
+
+Write $T$ for this nonzero output in the multiplicity space at the bottom of the chain. An element of that space is a map taking a local vector to an automorphic wave. For our chosen member, the comparison at the last step is an equality of functions. If the local theta map sends a test function and input $(\Phi,v)$ to $w$, the original integral in Section~\ref{sec:lift} gives $F=T(w)$. Some pair has $w\ne0$ because the local theta map is nonzero~\cite{shearjoin,shearraw}.
+
+To see that this $w$ gives a wave of positive norm, use the Petersson inner product. It integrates one wave times the conjugate of the other over a fundamental domain with Haar measure. Rapid decay of cusp forms gives convergence. Since $T$ intertwines the irreducible local action with translations of the wave, the Petersson inner product pulled back by $T$ is a scalar multiple of the local inner product, by Schur's lemma. The scalar is positive. Pure tensors span, so $T\ne0$ has a nonzero value on at least one of them, and the Petersson norm of that value is positive. Thus for the smooth tensor $w$ produced by the integral,
+\[
+ \|T(w)\|_{\rm Pet}^2=\|T\|_{\rm mult}^2\,\|w\|_{\rm loc}^2>0 .
+\]
+Under this identification, a shear applied to $w$ translates the argument of $F$ on the \emph{right}, sending $F(g)$ to $F(g n_b)$~\cite{thetaoriginal,shearmetric}.
+
+The real shear can be chosen to belong to a subgroup defined over the ground field. Our member of the family carries a hyperbolic pair, two isotropic vectors $e,f$ over the quadratic extension with pairing one. At the real embedding where the measurement is made, this pair gives the unitary group indefinite signature $(p,q)$~\cite{thetaoriginal,shearjoin}. The shear fixes $e$ and adds a purely imaginary multiple of $e$ to $f$. A nonzero trace-zero element of the extension supplies that multiple over the ground field. Scaling $e,f$ by $e^{t/2},e^{-t/2}$ gives a dilation that conjugates $n_b$ to $n_{e^t b}$.
+
+The local representation belongs to the discrete series, so its matrix coefficients are square integrable~\cite{shearmetric}. One such coefficient is the overlap of a vector with its translate. Square integrability and uniform continuity under right translation together imply that this overlap tends to zero at infinity. Otherwise its magnitude would have a positive lower bound on infinitely many disjoint translates of a small neighborhood, contradicting square integrability. The Petersson identity carries this decay over to the overlap of the waves, first for finite sums of pure tensors and then by norm approximation. If every right shear fixed $F$, its overlap would instead stay at $\|F\|_{\rm Pet}^2>0$ even as $|b|\to\infty$. Thus the right action has a nonzero-frequency component of at least one sign. Dilations preserve its frequency ray, giving the translation representation of Section~\ref{sec:lift}~\cite{affine}.
+
+The detector, however, samples $F(n_b g)$, with the shear on the \emph{left}. Suppose it saw no nonconstant Fourier component at any $g$. Fourier uniqueness on the compact shear quotient, together with continuity, would give $F(n_b g)=F(g)$ for every adelic $b$. In particular, the left shear at the marked real place would fix $F$. Rational automorphy then makes $F$ invariant under every rational conjugate of that shear. The real components of the rational group elements are dense in $U(p,q)$. Indeed, the Cayley transform of rational skew-Hermitian matrices is dense in a neighborhood of the identity, and $U(p,q)$ is connected. Continuity now gives left invariance under $h n_b h^{-1}$ for every $h\in U(p,q)$. Taking $h$ to be the marked real component of $g$ turns this left action at $g$ into the right translation $g n_b$. We would have $F(g n_b)=F(g)$ for every real $b$, contradicting the overlap decay. Hence some $g_0$ and $c\ne0$ give the measurable coefficient required in \eqref{eq:circle}. This existence argument determines neither its amplitude nor a preferred observation point or channel.
+
+\subsection*{What a fixed detector measures}
+
+Fix this observation point and use its detected frequency $c$ as the unit, so $w_1>0$. The power $w_n$ in harmonic $nc$ is summed over an orthonormal basis of inputs, as in \eqref{eq:power}. Applying Parseval to successive shear derivatives gives $\sum n^k w_n<\infty$ for each $k\geq0$. In particular, the Gaussian measurement $h_w(r)=\sum_{n\geq1}w_n e^{-\pi n^2r^2}$ approaches the finite power $M=\sum_{n\geq1}w_n$ as $r\downarrow0$. The uniform count grows like $1/(2r)$ on the same scales. Equation~\eqref{eq:defect} gives the resulting failure of reciprocity even when a finite constant-mode weight is included.
+
+We can follow the discrepancy through to the boundary response. Replacing the unweighted Gaussian sum by $h_w$ in the Mellin transform gives the pulse amplitude
+\[
+ A_w(z)=\tfrac12s(s-1)\pi^{-s/2}\Gamma(s/2)D_w(s),\qquad
+ D_w(s)=\sum_{n\geq1}w_nn^{-s},\quad s=\tfrac12-iz.
+\]
+Rapid decay of the weights makes the series for $D_w$ converge locally uniformly on the whole plane. In particular, $0<D_w(1)<\infty$, so $A_w$ retains a simple zero at $s=1$. At $s=0$ the pole of $\Gamma(s/2)$ cancels the factor $s$, giving $A_w(-i/2)=-M$.
+
+For real $E$, the measured power is $|A_w(E)|^2$. Its negative half-logarithmic derivative extends meromorphically as
+\[
+ B_w(z)=A_w(z)\overline{A_w(\bar z)},\qquad m_w(z)=-\frac{B_w'(z)}{2B_w(z)}.
+\]
+The two endpoint values above have a direct consequence for reflection. On $z=iy$, $0\leq y<1/2$, the factors of $B_w(iy)$ are the negative real amplitudes at $s=1/2\pm y$. Their product is even in $y$, remains positive up to the endpoint, and has a simple zero at $y=1/2$. Hence $m_w(iy)=\tfrac i2(d/dy)\log B_w(iy)$ starts at zero and tends to $-i\infty$ as $y\uparrow1/2$. By continuity it equals $-i$ at some positive damping. The reflection formula $(1+im_w)/(1-im_w)$ has a pole there. This conclusion concerns the phase assigned by the logarithmic-derivative prescription. Measuring harmonic power alone leaves the causal phase and stability of the detector undetermined.
+
+The fixed detector also has too few real cancellation frequencies to reproduce the zeta spectrum. Choose $\sigma\geq2$ large enough that $\sum_{n>1}w_n n^{-\sigma}<w_1/2$. The first term gives $|D_w(\sigma+it)|\geq w_1/2$ for every $t$, while $|D_w(s)|\leq M$ throughout $\operatorname{Re}s\geq0$. Of the two disks centered at $\sigma+it$ with radii $\sigma-1/4$ and $\sigma-1/8$, the smaller contains the unit segment of the critical line centered at height $t$. The larger stays in the half-plane where the bound $M$ holds. Jensen's formula therefore bounds the number of zeros on each unit segment independently of $t$. This gives $O_w(T)$ real cancellation frequencies up to $T$, whereas the simple critical-line zeros alone number $\gg T\log T$~\cite{bcy}.
+
+The fixed detector measures correlations as well as powers. The diagonal of its correlation matrix gives the $w_n$, while the other entries measure overlaps between harmonics. In the notation of Section~\ref{sec:lift}, with inner products linear in the first slot,
+\[
+ \sum_j W_qF_j(g_0)\overline{W_{q'}F_j(g_0)}
+    =\langle T^*u_{q'},T^*u_q\rangle .
+\]
+
+Now change the detector setting when changing harmonic. The rational dilation $d(a)$ satisfies $d(a)n_bd(a)^{-1}=n_{a^2 b}$. Measuring the coefficient at $n^2c$ at the point $d(1/n)g_0$ gives $W_{n^2c}F(d(1/n)g_0)=W_cF(g_0)$ by rational automorphy and the Haar-preserving substitution $u\mapsto n^2u$. This equality holds for every input, so at zero translation the different settings repeat the same amplitude vector. Every entry of their matrix of inner products is $w_1$, and the matrix has rank one. The settings can nevertheless be distinguished by their response to translation. At setting $n$ the normalized phase is $e^{in^2\omega b}$. Averaging it over the real shear with the Poisson kernel $y/[\pi(y^2+b^2)]$ gives $e^{-n^2|\omega|y}$. At $y=\pi r^2/|\omega|$ this is the $n$th term in the circle heat trace. Assigning each setting unit weight to form the sum is a choice of measurement.
+
+There is also a way to approximate the uniform harmonic count with normalized wave packets on the extracted circle. The calibration and energy required can be computed explicitly. With $e_n(z)=z^n$ and $y>0$, consider
+\[
+ f_y=Z_y^{-1/2}\sum_{n\ge1}e^{-ny/2}e_n,\qquad
+ Z_y=\sum_{n\ge1}e^{-ny}=\frac1{e^y-1}.
+\]
+Orthonormality gives $\|f_y\|=1$, with Born probability $e^{-ny}/Z_y$ in harmonic $n$. Multiplying the heat expectation by $Z_y$ gives
+\[
+ Z_y\langle e^{-\pi r^2N^2}f_y,f_y\rangle
+        =\sum_{n\ge1}e^{-ny}e^{-\pi n^2 r^2}\longrightarrow h(r)
+        \qquad (y\downarrow0).
+\]
+For each fixed $r>0$, the calibration error is at most $y\sum_{n\ge1}n e^{-\pi n^2r^2}$ since $1-e^{-ny}\le ny$. As the mode weights flatten, the calibration grows as $Z_y\sim 1/y$. The same geometric series gives the mean kinetic energy,
+\[
+ \langle N^2\rangle_{f_y}=\frac{1+e^{-y}}{(1-e^{-y})^2}\sim\frac{2}{y^2}.
+\]
+Thus these calibrated packets approach the exact trace at fixed $r$ at the cost of unbounded mean energy.
+
+\section{Finite arithmetic data and spectral checks}\label{app:checks}
+
+A prime power leaves two signatures in the Ramsey experiment of Section~\ref{sec:primewave}. One is local in time, a jump in slope. The other is its contribution to the full coherence for the preparation $\rho_*$. Both can be read from the smoothed prime excess $\mathcal E_\Lambda(t)$. Its ramp for the integer $n$ starts at $t=\log n$ with slope $\Lambda(n)$. Consequently $\mathcal E_\Lambda''-\mathcal E_\Lambda'+e^t$ on $t>0$ consists of point masses of weight $\log p$ at $j\log p$. Multiplying by $-e^{-t/2}$ gives the prime part of \eqref{eq:wave}.
+
+For the full coherence, it is more useful to keep the ramps and take their Laplace transform. They contribute $-\zeta'(s)/[s(s-1)\zeta(s)]$, whose principal part at $s=1$ is canceled by the two smooth terms in $\mathcal E_\Lambda$. On inversion, a nontrivial zero $\rho$ of order $d$ contributes $d e^{\rho t}/[\rho(1-\rho)]$. The critical line is what gives these terms their quantum interpretation. The reciprocal denominator becomes $(\tfrac14+\gamma^2)^{-1}$, proportional to the probability assigned to each such eigenstate in $\rho_*$. The numerator $e^{t/2}e^{it\gamma}$ supplies the phase. The signed energies occur in pairs, so changing this phase to $e^{-it\gamma}$ leaves their sum unchanged. Together the nontrivial zeros contribute $e^{t/2}Z_*R_*(t)$.
+
+The remaining residues are explicit. The pole at $s=0$ contributes $\log(2\pi)$, and the trivial zero at $s=-2k$ contributes $-e^{-2kt}/[2k(2k+1)]$~\cite[\S I.1, Eqs.~(I.2)--(I.4)]{primeguide}. Transferring these terms to the prime side gives \eqref{eq:primecoherence}. Both zero sums converge absolutely down to $t=0$, where $\mathcal E_\Lambda(0)=1+\gamma_{\rm E}$ and $\sum_{k\ge1}1/[2k(2k+1)]=1-\log 2$. These values give the normalization $Z_*$ and hence $R_*(0)=1$. Continuity of the ramps extends the formula to their endpoints, including each prime-power time. In Alp\"oge's proof, one-sided bounds on the growth of this same excess over large windows exclude zeros to the right of the critical line~\cite{primeinput,primeguide}.
+
+\subsection*{How many primes an interval requires}
+A pulse of finite duration can probe the zeta energies using finitely many prime powers. To see where the cutoff enters, consider the wave trace averaged against a smooth test function $\phi$ of compact support. With $\psi_\Gamma=\Gamma'/\Gamma$, the full Weil formula, including the contribution at $t=0$, reads
+
+\begin{align}
+ W(\phi)={}&\widehat\phi(i/2)+\widehat\phi(-i/2)-(\log\pi)\phi(0)\notag\\
+ &+\frac1{2\pi}\int_{\mathbb R}\widehat\phi(u)\,
+             \operatorname{Re}\psi_\Gamma(1/4+iu/2)\,du\notag\\
+ &-\sum_p\sum_{j\ge1}\frac{\log p}{p^{j/2}}
+             [\phi(j\log p)+\phi(-j\log p)] .
+ \label{eq:weil}
+\end{align}
+To compute the norm of a pulse $f$ confined to $(-a,a)$, choose its autocorrelation $\phi=f*\widetilde f$, where $\widetilde f(t)=\overline{f(-t)}$. In frequency space this gives the positive sum $W(\phi)=\sum_\gamma m_\gamma|\widehat f(\gamma)|^2$. In time it vanishes outside $[-2a,2a]$, so the prime sum stops at $p^j\le e^{2a}$. The two descriptions give the same norm on the interval~\cite{connesmarcolli}.
+
+Completing the smooth pulses in this norm on the whole real line gives a Hilbert space unitarily equivalent to the scalar channel under the critical-line theorem~\cite{suzukiglobal}. On the interval, Suzuki's operator is the self-adjoint extension of differentiation with boundary phase $\pi$ in his convention. Its inverse is $H_{\rm s}^{-1}$ compressed to the interval space. Increasing $a$ admits a larger trial space, so the variational principle gives $t_{a,n}\searrow\gamma_n$ for each fixed $n$. Thus the $n$th positive interval eigenvalue $t_{a,n}$ bounds the $n$th \emph{distinct} positive ordinate $\gamma_n$ from above. A finite list of prime powers determines the inner product for this calculation, although the space of pulses on which one solves the eigenvalue problem is still infinite dimensional~\cite{suzukiconvergence}.
+
+\subsection*{Three levels from the Gaussian}
+Table~\ref{tab:chain} gives the energies obtained from thermal moments in Section~\ref{sec:chain}. The heat pulse provides an independent calculation of the same levels.
+
+\begin{table}[!htb]
+\centering
+\begin{tabular}{r@{\qquad}rrr}
+\hline
+Sites & First energy & Second energy & Third energy \\
+\hline
+6  & 14.1347251871 & 21.0275131476 & 25.2969663424 \\
+12 & 14.1347251417 & 21.0220396388 & 25.0108575817 \\
+16 & 14.1347251417 & 21.0220396388 & 25.0108575801 \\
+\hline
+\end{tabular}
+\caption{Positive energies inferred from the leading $N$ sites of the thermal chain at $s=2$. Figure~\ref{fig:chain-convergence} plots the errors before rounding.}
+\label{tab:chain}
+\end{table}
+
+The heat calculation uses the evenness of $k$ to write its Fourier transform as $A(z)=A_2(z^2)$. Expanding the Fourier kernel, the coefficient of $y^j$ in $A_2(y)$ is $2(-1)^j\int_0^\infty x^{2j}k(x)\,dx/(2j)!$. The Taylor series then gives $\beta_j$ by the division displayed below. The paired product for $A$ identifies each coefficient with a moment of the inverse squared energies,
+
+\begin{equation}
+ -\frac{2A_2'(y)}{A_2(y)}=\sum_{j\ge0}\beta_jy^j,\qquad
+ \beta_j=\sum_{\gamma>0}\frac{2m_\gamma}{\gamma^2}\,(\gamma^{-2})^j .
+ \label{eq:ritz}
+\end{equation}
+The matrices $(\beta_{i+j})$ and $(\beta_{i+j+1})$, $0\le i,j<N$, play the same roles as the two moment matrices in the thermal chain. The first gives the inner products of monomials and the second represents multiplication by the variable, now $\gamma^{-2}$. Consequently the largest generalized eigenvalues of the second matrix relative to the first approximate the inverse squares of the \emph{lowest} energies. Taking inverse square roots at $N=16$ gives
+
+\[
+ 14.134725141735,\qquad 21.022039638772,\qquad 25.010857580146.
+\]
+This calculation used twelve harmonics, integration up to $x=2.5$, and 180 decimal digits. Increasing these to sixteen harmonics, $x=3$ and 220 digits gave the same rounded values. A further check uses a Gaussian window $\widehat\phi(E)=e^{-E^2/20}$ in \eqref{eq:weil}, so that the first few levels dominate the spectral sum and the prime series converges absolutely. Keeping $p^j\le1000$ and $|u|\le60$ in the integral gives $9.1756700971471485\times10^{-5}$. At working precision this differs by $1.7\times10^{-20}$ from the sum of $2e^{-\gamma^2/20}$ over the three computed levels.
+
+\subsection*{Measuring a degeneracy at the end site}
+A degenerate line collects the probabilities of all its states. To see how that affects a return experiment, consider the density operator $\rho=(H_+^2+uI)^{-1}/S$ for the positive Hamiltonian with full multiplicities. Its eigenvalue $\ell_\gamma=\lambda_\gamma/S$ occurs $m_\gamma$ times and its trace is one. The end site of Section~\ref{sec:chain} therefore places total probability $m_\gamma\ell_\gamma$ on that line.
+
+With the chain generator normalized to $K/S$, the return amplitude is $C_{K/S}(t)=\sum_{\gamma>0}m_\gamma\ell_\gamma e^{-it\ell_\gamma}$. Two features of this signal count a repeated level differently. Averaging its squared magnitude over all time leaves the square of each line's total probability, while its initial slope gives $iC_{K/S}'(0)=\operatorname{Tr}\rho^2$, the sum of the squared probabilities of the individual states. Their difference is
+
+\[
+ \lim_{\tau\to\infty}\frac1{\tau}\int_0^\tau |C_{K/S}(t)|^2\,dt-iC_{K/S}'(0)
+   =\sum_{\gamma>0}m_\gamma(m_\gamma-1)\ell_\gamma^2 .
+\]
+It vanishes exactly when all zeros are simple. Over a finite observation time $\tau$, the interference between lines separated by $\Delta\ell$ picks up the averaging factor $\tau^{-1}\int_0^\tau e^{it\Delta\ell}\,dt$, of magnitude at most $2/(\tau|\Delta\ell|)$. Resolving such a pair by time averaging therefore calls for $\tau|\Delta\ell|\gg1$. The lines accumulate at zero, so no finite observation time resolves every pair.
+
+Counting states with
+multiplicity, the Riemann--von Mangoldt law gives
+$\ell_n\asymp(\log n)^2/n^2$ as $n\to\infty$. Hence $\rho$ has finite
+von Neumann entropy, and $\operatorname{Tr}\rho^\alpha$ is finite exactly
+for $\alpha>1/2$ among positive $\alpha$.
+
+\subsection*{Prime filters and return times}
+At a prime time $\log p$, the arithmetic filter has a simple action on the scale record. For a rapidly decreasing probe $f$, let $x$ be the logarithm of the resolution and write $h_f(x)=e^{x/2}\sum_{n\ge1}f(ne^x)$. The terms with indices $n=pm$ alone contribute $p^{-1/2}h_f(x+\log p)$. Thus a shift by $\log p$ isolates every $p$th harmonic. Figure~\ref{fig:prime-filter} shows this for $p=2$. Subtracting those harmonics acts on the scale record and on the associated quantum packet as
+
+\begin{equation}
+ h_f(x)\longmapsto h_f(x)-p^{-1/2}h_f(x+\log p),\qquad
+ \mathcal S_p=I-p^{-1/2}e^{i(\log p)H}.
+ \label{eq:sieve}
+\end{equation}
+Here a quantum packet is a limit of smooth time signals in the arithmetic norm of Appendix~\ref{app:checks}. The shift in the first expression acts on each energy component of the packet by a phase, giving the exponential in the second~\cite{suzukiglobal}.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\linewidth]{figures/manuscript/prime-filter.pdf}
+\caption{The prime-two filter for $f(u)=\exp[-(\log u)^2/(2\sigma^2)]$, $u>0$, with $\sigma=0.065$. The dashed even contribution is the full scale record shifted left by $\log 2$ and scaled by $1/\sqrt2$. Subtracting it from the full record leaves the solid odd contribution.}
+\label{fig:prime-filter}
+\end{figure}
+
+
+Meyer's construction identifies signals differing by an element in the range of arithmetic summation. Translation preserves that range, so the same filter acts on his quotient space~\cite{meyerphysics}. Knowing $\mathcal S_p$ then determines the time-step operator $e^{i(\log p)H}$. Two primes already supply the continuous evolution. Since $\log2/\log3$ is irrational, integer combinations of their two time steps are dense, and strong continuity determines $e^{-itH}$ at every time. These evolution operators distinguish energies and act as scalars within each degenerate level.
+
+The same time interval has a geometric meaning for the shear frequencies. For the shear character of Section~\ref{sec:lift}, consider all its rational multiples with denominators a power of $p$. The real frequencies are $\omega\mathbb Z[1/p]$. Dilation by $e^t$ preserves this entire set precisely when $e^t$ and $e^{-t}$ both belong to $\mathbb Z[1/p]$. Its positive invertible elements are $p^j$ for $j\in\mathbb Z$, so $\log p$ is its least positive return time~\cite{knots}. One can ask separately whether the Ramsey interference revives at that time, and whether the observed point returns to its starting position.
+
+For the Ramsey coherence, equality $|R(t)|=1$ requires every occupied phase $e^{-it\gamma}$ to agree. At $t\ne0$ all signed zeros would then lie on one arithmetic progression. Such a progression has only $O(T)$ points to height $T$, fewer than the simple zeros alone~\cite{bcy}. Hence $|R(t)|<1$ for every nonzero time. Arbitrarily accurate recurrences of the coherence still occur. Any finite set of phases returns simultaneously as close to one as desired at arbitrarily large times, and absolute convergence makes the weight of the omitted phases arbitrarily small. Throughout, the density operator $\rho_R$ stays stationary.
+
+At a fixed automorphic level a returning point at $t=\log p$ would require a rational group element with marked eigenvalue $e^{t/2}$ and finite components conjugate into compact groups. Bounded positive and negative powers at the finite places make the eigenvalue an algebraic unit. Its square $p$ rules this out.
+
+The function-field analogue illustrates how much a single time step can reveal. For a smooth projective curve over $\mathbf F_q$, the eigenvalues of Frobenius on degree-one cohomology have modulus $\sqrt q$. After division by $\sqrt q$ their phases admit a unitary realization with time step $\log q$. One such step determines energies only modulo $2\pi/\log q$. This single-step ambiguity explains why the two incommensurate prime times in this appendix suffice to distinguish energies.
+
+
+\section{Eleven resonators over a damped frequency band}\label{app:circuit}
+Figure~\ref{fig:resonators} represents the port response by eleven parallel resonator branches. In each branch the printed frequency and strength in Table~\ref{tab:resonators} specify the component values $L_j=1/d_j$ and $C_j=d_j/\omega_j^2$. These numbers come from the prime gas at inverse temperature two. To bound the reflection error over the entire band, we combine a sweep at discrete frequencies with an analytic bound on how far the response can bend between samples.
+
+\begin{table}[!htb]
+\centering
+\begin{tabular}{r@{\quad}rr@{\qquad\qquad}r@{\quad}rr}
+\hline
+$j$ & $\omega_j$ & $d_j$ & $j$ & $\omega_j$ & $d_j$\\
+\hline
+1 &14.134725 &2         &7  &44.235239 &4.941255\\
+2 &21.022040 &2         &8  &55.219053 &10.104389\\
+3 &25.010858 &2.0000004 &9  &76.186131 &23.774624\\
+4 &30.426365 &2.0055759 &10 &127.55057 &84.042042\\
+5 &32.966704 &2.0359943 &11 &417.53930 &1275.5029\\
+6 &38.229004 &2.9518674 & & &\\
+\hline
+\end{tabular}
+\caption{Branch frequencies $\omega_j$ and strengths $d_j$ for the circuit in Figure~\ref{fig:resonators}. Values are in the normalized units of \eqref{eq:branches}.}
+\label{tab:resonators}
+\end{table}
+
+The couplings near two have a spectral interpretation. For a branch whose frequency and end-site weight converge to $\gamma$ and $w_\gamma$, respectively, \eqref{eq:branches} gives $d_j\to2S w_\gamma/\lambda_\gamma=2m_\gamma$. The first three values, $2$, $2$ and $2.0000004$, are consistent with simple zeros. Certifying a multiplicity this way would require isolating the line and bounding the error in its inferred order. At higher frequencies a branch can represent the combined response of several levels. The uniform error estimate below applies to the reflection at the port.
+
+\subsection*{From thermal moments to component values}
+Rescale the chain variable to $X=200\lambda$. Its end-site moments $M_k=200^k\mu_k$ are determined by the Taylor coefficients of $L_\xi$ in \eqref{eq:powers},
+\[
+ M_k=\frac{(-1)^k(k+1)}{200S}[t^{k+1}]L_\xi(u+200t),\qquad u=9/4.
+\]
+An $N$-branch circuit requires the moments $M_0$ through $M_{2N-1}$. They determine the monic polynomial $p_N(X)=X^N+\sum_{j<N}a_j X^j$ orthogonal to $1,X,\ldots,X^{N-1}$ through the equations $\sum_{j<N}M_{i+j}a_j=-M_{i+N}$ for $0\le i<N$. Its roots $x_j$ give the eigenvalues of the compressed chain. Indeed, after multiplication by $X$, taking the remainder modulo $p_N$ discards exactly the component orthogonal to the retained sites.
+
+Returning to the original units gives $\lambda_j=x_j/200$. The first $N$ moments then determine the end-site probabilities through $\sum_j\nu_j x_j^k=M_k$ for $0\le k<N$. Substitution in \eqref{eq:branches} gives the circuit parameters. We solved the moment equations and isolated the roots with 768-bit ball arithmetic (Arb via python-flint 0.9.0) before rounding the parameters to the table.
+
+\subsection*{Why the error bound holds between sample frequencies}
+Let $f(z)=\Theta(z)-\widehat\Theta_{11}(z)$ be the reflection error for the printed parameters. Damping places the measurement line $z=E+i$ inside the region where both reflections are analytic and bounded by one. For the circuit, passivity gives the bound because positive $L_j,C_j$ give $Y_N$ nonnegative real part for $\operatorname{Re}\sigma>0$. For the exact reflection the bound follows from \eqref{eq:theta}. Hence $|f|\le2$ throughout the upper half-plane. A disk of radius $r<1$ centered on the measurement line stays in this region. Cauchy's estimate gives $|f''(E+i)|\le 4/r^2$, and allowing $r$ to approach one gives $|f''|\le4$ on the band.
+
+For a grid of spacing $h$, the difference between $f$ and its linear interpolation is at most $h^2\sup |f''|/8$. This familiar interpolation estimate applies also to complex amplitudes, since the error is the integral of the second derivative against the interpolation error kernel.
+
+The sweep uses the 2001 points $z_k=10+k/100+i$, $0\le k\le2000$. At each point the logarithmic derivative in Appendix~\ref{app:boundary} gives $m=i\xi'(s)/\xi(s)$ at $s=1/2-iz_k$, while \eqref{eq:branches} gives the circuit response at $\sigma=-iz_k$. At 160-bit ball precision the largest upper bound on $|f(z_k)|$ is less than $1.760\times10^{-4}$. The line segment between two sampled complex amplitudes stays within the larger of their two moduli. Adding the interpolation allowance $5\times10^{-5}$ for $h=0.01$ therefore gives
+
+\[
+ \sup_{10\le E\le30}|\Theta(E+i)-\widehat\Theta_{11}(E+i)|
+ <2.26\times10^{-4}.
+\]
+The bound includes the rounding of the printed parameters and assumes ideal inductors and capacitors. A single frequency is enough to rule out a proposed design for this band. At $30+i$ every exact truncation with $1\le N\le10$ has error greater than $2.39\times10^{-3}$, with the smallest of these errors at $N=10$. Eleven is therefore the first truncation of this chain that meets the tolerance of $10^{-3}$ across the band. The minimum for other network designs could differ.
+
+\begingroup\small
+\begin{thebibliography}{99}
+\addcontentsline{toc}{section}{\refname}
+\bibitem{polya} G. P\'olya, letter to A. Odlyzko, 3 January 1982.
+\href{https://www-users.cse.umn.edu/~odlyzko/polya/index.html}{Correspondence on the origins of the Hilbert--P\'olya conjecture}.
+
+\bibitem{alpoge} L. Alp\"oge, \href{https://alpo.ge/remark.pdf}{\emph{Remark}}, announcement, 20 November 2026.
+
+\bibitem{sutherland} Lean and Mathlib communities, \href{https://leanprover-community.github.io/blog/posts/riemann-hypothesis/}{\emph{Lean verification of the Riemann Hypothesis}}, 21 November 2026.
+A.~V. Sutherland, \href{https://math.mit.edu/~drew/grh/}{\emph{Verification files for the Lean proof of the Riemann Hypothesis}}, including the source archive checksum and independent verification records.
+
+\bibitem{primeinput} L. Alp\"oge, same release, \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChBalance.lean\#L200-L209}{character-family balance} and \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Formalism/SizeWindowBrackets/GrowthBoundGivesRiemannHypothesis.lean\#L109-L121}{window bounds entering the critical-line argument}.
+
+\bibitem{meyerphysics} R. Meyer,
+\href{https://arxiv.org/abs/math/0412277}{\emph{A spectral interpretation for the zeros of the Riemann zeta function}},
+Theorems~3.3, 4.1, 5.8 and Corollary~4.2.
+
+\bibitem{suzukiglobal} M. Suzuki,
+\href{https://arxiv.org/html/2301.00421v3}{\emph{On the Hilbert space derived from the Weil distribution}}, \S\S2, 4.1 and~6.
+
+\bibitem{jacobi} G. Teschl, \href{https://www.mat.univie.ac.at/~gerald/ftp/book-jac/}{\emph{Jacobi Operators and Completely Integrable Nonlinear Lattices}}, Amer. Math. Soc., Providence, RI, 2000, Ch.~2.
+
+\bibitem{connesmarcolli} A. Connes and M. Marcolli, \href{https://alainconnes.org/wp-content/uploads/bookwebfinal-2.pdf}{\emph{Noncommutative Geometry, Quantum Fields and Motives}},
+Amer. Math. Soc., Providence, RI, 2008, Ch.~2, \S2.
+
+\bibitem{suzukiconvergence} M. Suzuki,
+\href{https://arxiv.org/html/2610.32704v1}{\emph{Spectral convergence associated with Weil's quadratic form}}, arXiv:2610.32704 (2026), Theorems~1.1 and~3.3 and Proposition~6.1.
+
+\bibitem{thetaoriginal} L. Alp\"oge, released Lean source, \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Formalism/LocalToGlobal/IndefiniteReal/OrthogonalComplementCharacterisation.lean\#L44-L55}{the last theta integral}, \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Formalism/LocalToGlobal/IndefiniteReal/ScalarOnPartsFull.lean\#L51-L96}{equivariant Petersson evaluation}, and \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Formalism/LocalRingCardinality/DataSpaces.lean\#L108-L120}{the marked hyperbolic pairs}.
+
+\bibitem{affine} K.-H. Neeb and G. \'Olafsson,
+\href{https://arxiv.org/abs/1704.01336}{\emph{Antiunitary representations and modular theory}}, \S2.4.1.
+
+\bibitem{thetamixed} L. Alp\"oge, same release, \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AbelianVarietyTheory/Proofs/DecoratedLatticeProofs/MixedThetaSeriesTermsLawsUnipotentRational.lean\#L173-L183}{the unipotent transformation in \emph{term\_laws}} and \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AbelianVarietyTheory/Proofs/DecoratedLatticeProofs/ThetaTermSeriesSummableModerateGrowthUniformStatement.lean\#L13-L14}{absolute summability and growth}.
+
+\bibitem{stagebasis} L. Alp\"oge, released Lean source,
+\href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AbelianVarietyTheory/Proofs/DecoratedLatticeProofs/ThetaChainCuspSpaceFiniteDimOfHarishChandra.lean\#L17-L23}{fixed-stage finiteness in \emph{finDim\_of\_levFacts}},
+\href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AbelianVarietyTheory/Proofs/DecoratedLatticeProofs/ThetaLiftChainOntoCuspFormsOfInnerProduct.lean\#L39-L43}{its application in the chain}, and
+\href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AbelianVarietyTheory/Proofs/DecoratedLatticeProofs/ThetaLiftUpwardsAdjointOfRapidDecayStatement.lean\#L11-L12}{the upward Petersson adjoint}.
+
+\bibitem{shearfamily} L. Alp\"oge, released Lean source, revision \emph{a6ac91a4}. The construction uses \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AutomorphicArithmetic/CharacterBoxes/MainConclusion.lean\#L7-L14}{construction of the representation and window inputs}, \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean\#L810-L813}{use of those inputs}, \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AutomorphicArithmetic/CharacterBoxes/ZeroFreeAllOfTopG.lean\#L26-L33}{family for a primitive character}, \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Formalism/SharpRestriction/ParamsHeightRankConstant.lean\#L187-L190}{family existence with common bounds}, \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AutomorphicArithmetic/CharacterBoxes/DesWin.lean\#L23-L31}{simultaneous bounds on the chosen family}, and \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Formalism/SharpRestriction/FamCore.lean\#L138-L142}{a member beyond any scale threshold}.
+
+\bibitem{shearrow} L. Alp\"oge, same release. The reference space and the row map are specified by the \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Formalism/SharpRestriction/GlobalSchurBounds/TopDensityNGeSixteen.lean\#L1424-L1468}{eventual positive-rank theorem}, \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/Hyps.lean\#L57-L61}{common selection and eventual surjectivity}, \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ColJoinSOfSTiesR.lean\#L71-L79}{coordinate map and row comparison}, and \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AbelianVarietyTheory/Definitions/AutomorphicMembership/GoodPartHasComplexCoordinates.lean\#L93-L100}{norm factor and arithmetic coordinate identity}.
+
+\bibitem{shearjoin} L. Alp\"oge, same release. For the selected member see the \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ShapeOf.lean\#L24-L29}{joint use of the selection and row hypotheses}, \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/BundlePackEqAdelicData.lean\#L102-L122}{transfer to the same bundle}, \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/PackB.lean\#L23-L33}{local existence and positive hyperbolic rank}, \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/IndefRRealT.lean\#L30-L36}{weak characterization of the real representation}, and \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Formalism/LocalToGlobal/IndefiniteReal/LinksW.lean\#L154-L159}{upgrade to the integral identities}.
+
+\bibitem{shearraw} L. Alp\"oge, released Lean source. For the actual integral see \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Formalism/LocalToGlobal/IndefiniteReal/LinksDefs.lean\#L649-L654}{the downward composite}, \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Formalism/LocalToGlobal/IndefiniteReal/LinksChar.lean\#L58-L65}{the nonzero local tensor map}, \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Formalism/LocalToGlobal/IndefiniteReal/LinksChar.lean\#L277-L303}{the local and global identities along the chain}, \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Formalism/LocalToGlobal/IndefiniteReal/OrthogonalComplementCharacterisation.lean\#L44-L55}{the integral equality \emph{IsIo.eq}}.
+
+\bibitem{shearmetric} L. Alp\"oge, same release. The Petersson norm and the real action follow from \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AbelianVarietyTheory/Proofs/DecoratedLatticeProofs/CuspFormsRapidDecay.lean\#L10-L11}{rapid decay of cusp forms}, \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/HcFiniteAndSchurMult.lean\#L184-L191}{integrability and the Schur pairing}, \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/RePosOfIsMultIP.lean\#L133-L149}{positivity for a nonzero multiplicity vector}, \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Formalism/LocalToGlobal/IndefiniteReal/LinksChar.lean\#L232-L249}{the measure and model at the selected stage}, \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Formalism/LocalToGlobal/IndefiniteReal/ScalarOnPartsFull.lean\#L372-L382}{identification of its multiplicity space}, \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AbelianVarietyTheory/Proofs/DecoratedLatticeProofs/ThetaChainInnerProductsExistOfRapidDecay.lean\#L129-L146}{the identity for smooth tensors}, and \href{https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Formalism/LocalToGlobal/IndefiniteReal/FockTheta/DiscreteSeriesUnitary.lean\#L69-L74}{the discrete-series conditions}.
+
+\bibitem{canonicalphysics} J. Eckhardt, A. Kostenko and G. Teschl,
+\href{https://doi.org/10.1515/crelle-2015-0034}{Spectral asymptotics for canonical systems},
+\emph{J. Reine Angew. Math.} \textbf{736} (2018), 285--315,
+Theorems~2.2 and~3.1, Eq.~(2.23), and Proposition~2.3.
+
+\bibitem{aleksandrov} A. B. Aleksandrov,
+\href{https://www.mathnet.ru/eng/znsl4437}{Inner functions and spaces of
+pseudocontinuable functions related to them}, \emph{Zap. Nauchn.
+Sem. LOMI} \textbf{170} (1989), 7--33.
+
+\bibitem{bcy} H. M. Bui, B. Conrey and M. P. Young,
+\href{https://arxiv.org/abs/1002.4127}{More than 41\% of the zeros of the zeta function are on the critical line},
+\emph{Acta Arith.} \textbf{150} (2011), 35--64, Theorem~1.1.
+
+\bibitem{knots} A. Connes and C. Consani, \href{https://arxiv.org/html/2501.06560v1}{\emph{Knots, primes and class field theory}}, arXiv:2501.06560 (2025), Theorem~1 and \S\S2--3.
+\bibitem{hoeffding} W. Hoeffding, \href{https://doi.org/10.1080/01621459.1963.10500830}{Probability inequalities for sums of bounded random variables}, J. Amer. Statist. Assoc. \textbf{58} (1963), 13--30.
+
+\bibitem{primeguide} Claude Fable 5.2, Codex Astra 6.2 and Gemini Carbon, at the behest of M.~O. Rubinstein,
+\href{https://www.math.uwaterloo.ca/~mrubinst/alpoge_claude_grh/zeta-paper_v2.pdf}{\emph{The Alp\"oge--Claude proof of the Riemann hypothesis explained for the Riemann zeta function}},
+working draft, version 2, 22 November 2026, \S\S I.1 and III.8.
+
+\bibitem{zhangperiods} R. Zhang,
+\href{https://www.ihes.fr/~rzhang/files/GRH\%20note.pdf}{\emph{A preliminary note on Alp\"oge's proposed proof of the generalized Riemann hypothesis}},
+22 November 2026, \S4.4, Eqs.~(4.2)--(4.3) and Lemma~4.2.
+
+\end{thebibliography}
+\endgroup
+\end{document}

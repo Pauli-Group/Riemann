@@ -354,6 +354,8 @@ The sum over $k$ accounts for the known trivial zeros. The first term in the pri
 
 Equation~\eqref{eq:primecoherence} gives us more than a list of frequencies against which to test a wave system. Primes alone predict a signed answer at every time. In particular, two copies of the signal prepared a time $\log 2$ apart have a negative overlap. A system reproducing the entire record must also supply its weights, including the linear factor in the order of a repeated zero. We can now ask what a wave in the arithmetic proof can actually do.
 
+At $t=4\log k$ the prime sum in \eqref{eq:primecoherence} is $\mathcal E_\Lambda(4\log k)=G(k^4)$ in Crossley's fourth-power criterion~\cite[Theorem~11.1]{crossleyquartic}. This criterion characterises RH by counting the integers $k$ in $[L^2,L^3]$ for which $G(k^4)>c k^{4\theta}$.
+
 \section{The wave supplied by the theta lift}
 \label{sec:lift}
 
@@ -817,6 +819,8 @@ Let $Y(x)$ be the bracket in \eqref{eq:primecoherence}, before multiplication by
 \]
 Unconditionally, $\sigma_c=\sup_\rho\operatorname{Re}\rho$. Indeed the explicit formula is $Y(x)=\sum_\rho e^{\rho x}/[\rho(1-\rho)]$, with absolutely summable coefficients. This gives convergence above the supremum. Conversely, finite total power at $\sigma$ makes the Laplace transform of $Y$ holomorphic for $\operatorname{Re}s>\sigma$ by Cauchy--Schwarz. The logarithmic derivative identity above gives the continued transform a pole with nonzero residue at every distinct $\rho$. Reflection gives $\sigma_c\ge1/2$, and the one-sided estimate and the positive filter of Appendix~\ref{app:window} give $\sigma_c\le1/2$. Consequently the extrema of the set of allowed amplitude decay rates, understood as infimum and supremum, are $(1-\sigma_c)/2$ and $\sigma_c/2$. This identifies them from a record defined entirely by prime powers and elementary completion terms.
 
+At $\theta=2181/2500$, Crossley gives $8\max(0,\sigma_c-\theta)$ as the logarithmic growth exponent for the largest mass on qualifying interior runs of an ordinary-prime tent sampled at fourth powers~\cite[Proposition~11.5(c)]{crossleyquartic}.
+
 On either occupied sign of the shear generator $Q$, dilation translates the spectral projections of $\log|Q|$. The spectral representation of this translation action~\cite{affine} gives copies of $L^2(\mathbb R,dx)$ with the Petersson norm. In one copy prepare
 \[
  f_T(x)=T^{-1/2}\mathbf1_{[0,T]}(x)e^{-\sigma_c x}Y(x).
@@ -1221,6 +1225,8 @@ working draft, version 2, 22 November 2026, \S\S I.1, I.7--8 and III.8.
 \bibitem{stringlift} C. Angelantonj, I. Florakis and B. Pioline, \href{https://arxiv.org/abs/1110.5318}{\emph{A new look at one-loop integrals in string theory}}, Commun. Number Theory Phys. 6 (2012), 159--201, Eqs.~(3.22)--(3.25).
 
 \bibitem{laxphillips} P. D. Lax and R. S. Phillips, \href{https://www.numdam.org/article/SEDP_1973-1974____A21_0.pdf}{\emph{A scattering theory for automorphic functions}}, S\'eminaire Goulaouic--Schwartz, 1973--1974, expos\'e~XXIII, pp.~6--7.
+
+\bibitem{crossleyquartic} L. Crossley, \href{https://doi.org/10.5281/zenodo.24466908}{\emph{The Crossley Criteria: A Mathematical Proof of the Riemann Hypothesis, Verified in Lean}}, version 1.0, 23 November 2026.
 
 \end{thebibliography}
 \endgroup

@@ -56,7 +56,7 @@
 \end{center}
 \vspace{6pt}
 \begin{abstract}
-The Hilbert--P\'olya proposal asks whether the zeros of the Riemann zeta function can be understood as quantum energy levels. We start with one oscillator for each prime. Their thermal fluctuations fix the couplings of a spin chain. In the infinite chain, each line in the end-site spectrum gives the height and order of a zero. On the modular surface each nontrivial zero also describes an escaping wave. Its height sets the frequency and its real part sets the decay rate. We average the intensity of a lifted wave around a horizontal loop. Translating this record in logarithmic height and projecting it onto the profiles allowed by the surface gives the modular wave equation. The outgoing power measures how closely a long loop samples the initial intensity's surface average. Alp\"oge's volume bound on a family of lifted waves constrains prime fluctuations and fixes a common exponential decay rate for the arithmetic resonances. Interference among resonances can delay loss for any prescribed finite time. The reflected signal recovers the boundary response of the chain. After compensation for the common decay, a time average gives a conserved norm, and the phases weighted by the prime count reproduce its interference signal.
+The Hilbert--P\'olya proposal asks whether the zeros of the Riemann zeta function can be understood as quantum energy levels. We start with one oscillator for each prime. Their thermal fluctuations fix the couplings of a spin chain. In the infinite chain, each line in the end-site spectrum gives the height and order of a zero. On the modular surface each nontrivial zero also describes an escaping wave. Its height sets the frequency and its real part sets the decay rate. We average the intensity of a lifted wave around a horizontal loop. Translating this record in logarithmic height and projecting it onto the profiles allowed by the surface gives the modular wave equation. The power arriving at the cusp measures the squared error in a count of primitive lattice directions. Alp\"oge's volume bound limits this error and excludes amplitude decay rates below $1/4$ in wave time. Any faster resonance would have a slower partner by the zeta functional equation, so all arithmetic resonances share this rate. Interference can still delay loss for any prescribed finite time. The reflected signal recovers the boundary response of the chain. After compensation for the common decay, a time average gives a conserved norm, and the phases weighted by the prime count reproduce its interference signal.
 
 \end{abstract}
 
@@ -83,7 +83,7 @@ Two waves can each register at full power in their own detectors and yet span ze
 
 At each counting scale the proof selects independent preparations spanning nearly the whole finite target. The product of the lifted waves' lengths bounds their volume from above. Divisibility supplies the other bound. A nonzero integer divisible by several distinct primes has magnitude at least as large as their product. The determinant obeys a similar constraint once one accounts for the denominators of the lifts. Too large a positive excess in the prime count would squeeze the same family below its arithmetic lower bound~\cite{volumelean}.
 
-There is already a wave system in which both coordinates of a zero can be measured. A pulse on the modular surface, a surface of negative curvature with one open end, can escape after it is excited. Its arithmetic resonances oscillate at rates set by $\gamma$ and decay at rates set by $\beta$~\cite{uetake}. The critical line says they all have the same exponential decay rate. Conservation of the energy of the whole wave permits different amounts of leakage from different modes. The restriction on that leakage comes from the bound on prime fluctuations. To connect the lift with this experiment, we use its dilation to move a horizontal loop through the initial wave. How closely that loop samples the surface average determines how much power emerges from the open end at the corresponding time.
+There is already a wave system in which both coordinates of a zero can be measured. A pulse on the modular surface, a surface of negative curvature with one open end, can escape after it is excited. Its arithmetic resonances oscillate at rates set by $\gamma$ and decay at rates set by $\beta$~\cite{uetake}. Conservation of the energy of the whole wave permits different amounts of leakage from different modes. What could force a common lifetime? At the open end, a later reading samples a longer horizontal loop in the initial wave. The loop visits copies of the observing window labeled by pairs of coprime integers. Section~\ref{sec:cusp} relates the error in their weighted count to the power reaching the detector, so the arithmetic bound has a measurable consequence.
 
 To see what a quantum measurement of the same numbers would entail, we first build a closed system. Given the primes and the arithmetic bound, can we specify a Hamiltonian before calculating any zero, then read the heights and their multiplicities from its spectrum? To check both at once, recall the characteristic determinant of a finite matrix. An energy of degeneracy $d$ gives a zero of order $d$, since each independent state contributes one factor. The corresponding arithmetic function is
 \begin{equation}
@@ -151,8 +151,8 @@ still interacting with the surface. In 1974 Lax and Phillips explicitly associat
 reduced generator as $-\rho/2$, including the order of each zero~\cite{uetake}.
 An open system can have many different decay rates. The correspondence therefore
 identifies every zero while leaving room for one away from the critical line.
-Section~\ref{sec:cusp} returns to this experiment once the prime estimate has
-fixed the rate.
+Section~\ref{sec:cusp} shows how the prime estimate bounds the power escaping
+through the cusp and thereby fixes the rate.
 
 Weil's explicit formula gives a stronger test because it relates the primes to a
 sum over all the individual zeros. Applied to the autocorrelation of a pulse (its
@@ -433,18 +433,35 @@ With time dependence $e^{-ik\tau}$, a wave $e^{ikr}$ travels toward increasing h
        =\tfrac12 e^T\left|A_f(e^{-T})-c_f\right|^2 .
  \label{eq:loop-flux}
 \end{equation}
-The receiver is high in the cusp, but tracing the outgoing wave back to its initial data leads to a loop at height $e^{-T}$. Although its coordinate period is one, horizontal distance is $dx/y$, so its length is $e^T$. A later part of the pulse reads a longer initial loop. The squared difference between that loop average and the surface mean, multiplied by half the loop length, is exactly the outgoing power. This identity holds before we know where any zero lies.
+Tracing the outgoing wave back from the receiver leads to an initial loop at height $y=e^{-T}$. Horizontal distance there is $dx/y$, so this loop, a \emph{closed horocycle}, has length $e^T$. To see what a long loop samples, undo the identifications of the modular surface. The observing patch now appears in many copies along the loop. They carry the same coprime integer labels $(c,d)$ that gave the reflected wave in \eqref{eq:cusp-reflection}. Rows such as $(1,2)$ and $(-1,-2)$ describe the same image. A multiple such as $(2,4)$ cannot be the bottom row of an integer matrix of determinant one.
 
-These horizontal loops are called \emph{closed horocycles}. With the zeros on the critical line, the error in their averages is $O_{f,\epsilon}(y^{3/4-\epsilon})$ as $y\downarrow0$ for each smooth windowed intensity~\cite{zagier,horoequid}. Substitution into \eqref{eq:loop-flux} bounds the late power by a preparation-dependent constant times $e^{-(1/2-\epsilon)T}$ for every $\epsilon>0$. Conversely, a zero to the right of the line would violate this late-time bound for some window placed where the theta intensity is positive (Appendix~\ref{app:loop-flux}). Individual resonances explain where the decay exponent comes from.
+Write $R=e^{T/2}$, so the loop length is $R^2$. The count $N_f(R)$ includes both signs of each primitive row, weighted by the intensity sampled in its image. The unfolded loop integral gives $N_f(R)=2R^2 A_f(R^{-2})$. A loop that sampled the surface mean exactly would give $2R^2c_f$. The excess count $D_f(R)$ can have either sign, but the detector measures its square,
+\begin{equation}
+ D_f(R)=N_f(R)-2R^2c_f,\qquad
+ J_f(T)=\frac{|D_f(R)|^2}{8R^2}.
+ \label{eq:primitive-flux}
+\end{equation}
+This identity holds before any information about the zeros enters the argument.
+
+\subsection*{How the volume bound limits the outgoing power}
+First count the whole integer grid. For a smooth observing window, Poisson summation bounds the error in this count by any inverse power of $R$. The primes enter when we remove rows with a common divisor. A row divisible by both two and three would be removed twice, so its contribution must be added back once. Extending this inclusion and exclusion to all common divisors gives the M\"obius weights $\mu(m)$. When we resolve the count into powers $R^w$ by a Mellin transform, those weights contribute the factor $1/\zeta(w)$. Its poles determine how far we can lower the exponent in a bound for the excess count.
+
+The arithmetic input comes from Section~\ref{sec:history}. A large positive excess in a weighted prime count would shrink the volume spanned by the lifted waves below its arithmetic minimum. At prime-counting scale $X$, a chain of order $\sqrt X$ lifts gives a one-sided bound strong enough to exclude a pole of $1/\zeta(w)$ anywhere to the right of $1/2$. Changing the quadratic reference is essential here because a pole can cancel in a single prime count~\cite{volumelean,twistlean}. We can therefore evaluate the scale integral for the cusp detector on any line just to the right of $1/2$. For each fixed smooth window and $0<\epsilon<1/2$, this gives (Appendix~\ref{app:primitive-rows})
+\begin{equation}
+ |D_f(R)|=O_{f,\epsilon}(R^{1/2+\epsilon}),\qquad
+ J_f(T)=O_{f,\epsilon}\bigl(e^{-(1/2-\epsilon)T}\bigr).
+ \label{eq:late-power}
+\end{equation}
+Squaring the count estimate and dividing by $8R^2$ at $R=e^{T/2}$ gives the power bound for the whole pulse.
 
 To read the lifetime of one resonance, follow the part of the pulse still interacting with the surface. Uetake removed the freely traveling components and one known elementary mode. He proved that the resulting generator $A_c$ has eigenvalues $-\rho/2$, each with algebraic multiplicity equal to the order of $\rho$~\cite[Theorem~4.4]{uetake}. For $\rho=\beta+i\gamma$ an eigenmode therefore evolves in wave time $\tau$ as
 \begin{equation}
                  e^{-\beta\tau/2}\,e^{-i\gamma\tau/2}.
  \label{eq:cusp-decay}
 \end{equation}
-Wave energy can escape at many rates on an open surface. Alp\"oge's prime bound fixes $\beta=1/2$ for every mode. Thus however high the tone, its amplitude has the same exponential decay rate $1/4$. Generalized modes at a repeated zero can also have a polynomial prefactor. The self-adjoint Laplacian's square-integrable standing waves belong to a different part of the spectrum.
+Why does a bound on total outgoing power fix the lifetime of \emph{each} arithmetic resonance? A mode with amplitude decay rate below $1/4$ would leave a pole in the transform of the outgoing amplitude that \eqref{eq:late-power} forbids. One preparation might miss the mode. Its spatial profile is analytic and nonzero somewhere in every open patch of positive theta intensity. A narrow window there detects the pole, so at least one preparation would violate the bound (Appendix~\ref{app:loop-flux}).
 
-The geometric shift by $1/4$ in \eqref{eq:height-wave} comes from normalizing the height profiles with the hyperbolic area element. What makes the amplitude decay rate in \eqref{eq:cusp-decay} equal to $1/4$ as well? The product formula constrains the size of an arithmetic determinant at the complex embeddings through its divisibility at the finite primes. Applied to the family of waves in Section~\ref{sec:history}, with its denominators accounted for, this gives the lower side of the volume comparison (Appendix~\ref{app:cut-period}). To see why the precision of the volume bound matters, suppose the resulting error at scale $X$, with $r$ lifts, were $X/r+r^2$ up to $X^\epsilon$. Optimizing $r$ would give exponent $2/3$, provided the other errors respected that bound~\cite[\S I.8]{primeguide}. The zero-free criterion of Appendix~\ref{app:twisted-reference} would then give $\beta\le2/3$, and reflection would give $\beta\ge1/3$. A whole band of decay rates, from $1/6$ to $1/3$, would be allowed by this estimate. The sharper arithmetic estimate has cost $X/r+r$. Its exponent is $1/2$, where the two ends of the band meet at $1/4$. It is this gain in the arithmetic estimate that selects the rate.
+The zeta functional equation pairs $\rho$ with $1-\rho$. Their amplitude decay rates $\beta/2$ and $(1-\beta)/2$ add to $1/2$. If either exceeded $1/4$, its partner would fall below $1/4$ and violate the power bound. Both rates must therefore equal $1/4$. A pure arithmetic eigenmode therefore loses amplitude as $e^{-\tau/4}$ and power as $e^{-\tau/2}$. Generalized modes at a repeated zero can have polynomial prefactors. The $1/4$ shift in the wave equation \eqref{eq:height-wave} came from the surface area element. The common decay rate required the arithmetic estimate.
 
 A pulse made of many resonances can behave quite differently from a single tone. Two modes with opposite amplitudes at the exit lose no energy at that instant. There are enough closely spaced tones to sustain destructive interference. For any prescribed finite duration one can prepare a pulse in the resonance space that retains as near to all its initial squared norm as desired. Appendix~\ref{app:outgoing-flux} derives this directly from the outgoing wave equation. For a concrete example, the $222$nd, $223$rd and $224$th positive resonances each retain $13.53\%$ of their initial squared norm after four units of wave time. In the superposition specified in the appendix the retained fraction is $85.75\%$. Figure~\ref{fig:cusp-retention} shows the two readings. The three-tone preparation uses the indicated frequencies and phases.
 
@@ -642,7 +659,7 @@ Figure~\ref{fig:resonators} tests the circuit over $10\le E\le30$, a band contai
 \section{What the construction explains}
 The first positive zeta height illustrates what the different instruments measure. At the end of the local spin chain the largest frequency is near $0.00494950$. With $u=9/4$, converting that measured frequency $\lambda$ gives $\sqrt{1/\lambda-u}\simeq14.1347$. The line strength gives its multiplicity. On the modular surface the same height appears as an oscillation at $7.06736$ in wave time. Its amplitude decays as $e^{-\tau/4}$. The first instrument reconstructs a quantum energy from local hopping. The second lets a wave escape and measures both its frequency and its decay.
 
-Moving the cut through the theta integrals preserves the amplitude between a source and a detector. The restriction on the lifetime comes from a joint measurement. The lifted waves must span enough volume to meet the arithmetic lower bound on that family after accounting for denominators. This limits the excess in the weighted prime count. Changing its twisted reference ensures that a zero to the right of the line would leave a pole in at least one reading. Its exclusion, together with reflection, fixes the exponential decay rate of every arithmetic resonance. For the pulse launched from the lifted intensity, late outgoing power measures the error with which a long horizontal loop samples the surface mean, as in \eqref{eq:loop-flux}. In the untwisted prime count the number $1/2$ has a second operational meaning. It is the threshold damping exponent above which the signal has finite total power (Appendix~\ref{app:power-threshold}).
+The theta integrals conserve the amplitude between a source and a detector as we move the cut through the chain. The lifetime enters through a different property of the lifted waves. Their arithmetic volume bounds a fluctuation in the prime count, and the same primes determine how many coprime lattice directions a long horizontal loop samples. The cusp measures the squared excess in that count through \eqref{eq:primitive-flux}. A slowly decaying arithmetic resonance would release more late power than this count allows for a window that sees it. A faster one would have exactly such a slow partner under the zeta functional equation. In the untwisted prime count the exponent $1/2$ also has a direct meaning. It is the threshold damping exponent above which the signal has finite total power (Appendix~\ref{app:power-threshold}).
 
 The time signal distinguishes experiments that have the same list of frequencies. Local hopping advances phases at $\lambda$, while the Ramsey experiment requires the signed Hamiltonian $H$. With that clock a change of slope occurs at $t=\log 2$, and with the preparation $\rho_*$ the primes predict the entire coherence. For example, the phase-independent product of three overlaps at $0,t,2t$ equals $R_*(\log 2)^2R_*(\log 4)=-0.00643527\ldots$ when $t=\log 2$. This sign is lost in estimates of squared overlap magnitudes~\cite{periodblocks}. The compensated modal trace \eqref{eq:cusp-prime} retains it and gives the same answer for all time separations. The resulting squared norm equals the work done by a drive coupled to that collective signal. The energy left in the open scattering region continues to escape through the cusp.
 
@@ -1123,16 +1140,55 @@ On $X=\mathrm{PSL}_2(\mathbb Z)\backslash\mathbb H$ the constant projection of t
 \]
 The derivative combination isolates the component traveling toward increasing height. Its squared modulus is the outgoing radiation density in Uetake's normalization~\cite[\S5, p.~115]{uetake}. At fixed retarded time $T=\tau-r$, the incoming component samples $q(2r+T)$. Since $f$ has compact support, $A_f(y)$ vanishes sufficiently high in the cusp. There $q(r)=-c_f e^{-r/2}$, so the incoming component vanishes as $r\to+\infty$. Squaring the outgoing amplitude gives \eqref{eq:loop-flux}. The detector can therefore predict the radiation at the ideal cusp from an integral around an initial loop of length $e^T$.
 
-To see which decay exponents this measurement can reveal, pair the Eisenstein series with the windowed intensity. Integrating each image in the sum over its own copy of the fundamental region gives the strip integral
+\subsection*{Counting primitive rows in the aperture}\label{app:primitive-rows}
+Choose a smooth compactly supported function $h$ on the upper half-plane whose translates by $\mathrm{PSL}_2(\mathbb Z)$ sum to $f$. A partition of unity on the support of $f$ gives such a choice. For $v=(v_1,v_2)$ put
 \[
- \int_0^\infty A_f(y)y^{s-2}\,dy
-    =\int_X f(z)E(z,s)\,d\mu(z),\qquad \operatorname{Re}s>1 .
+ Q_z(v)=\frac{|v_1z+v_2|^2}{\operatorname{Im}z},\qquad
+ F_f(v)=\int_{\mathbb H}h(z)\,\delta\bigl(Q_z(v)-1\bigr)\,d\mu(z).
 \]
-The area mean accounts for the pole at $s=1$, and compact support controls the upper end of the height integral. At a nontrivial zero $\rho$, the denominator of \eqref{eq:cusp-reflection} vanishes at $s=\rho/2$ and its numerator is nonzero. A pole surviving the pairing with $f$ corresponds under Mellin inversion to $y^{1-\rho/2}$, with powers of $\log y$ allowed at higher order. The factor $e^{T/2}$ in the radiation amplitude turns this into $e^{-(1-\rho)T/2}$. In the labeling of \eqref{eq:cusp-decay}, this is the mode of the reflected zero $1-\rho$.
+The delta integrates over the indicated level with its usual change-of-variables factor. This weight is smooth because the gradient of $Q_z(v)$ in $z$ never vanishes for $v\ne0$. On the support of $h$ the quadratic forms are uniformly positive and bounded, so $F_f$ is supported in an annulus.
 
-With the critical line established, the horocycle estimate gives $A_f(y)-c_f=O_{f,\epsilon}(y^{3/4-\epsilon})$ as $y\downarrow0$~\cite{zagier,horoequid}. Equation~\eqref{eq:loop-flux} then bounds both $J_f(T)$ and its integral over $[T,\infty)$ by $O_{f,\epsilon}(e^{-(1/2-\epsilon)T})$ for each $\epsilon>0$, with constants depending on the preparation.
+A cusp image with bottom row $(c,d)$ has height $1/Q_z(c,d)$. Unfolding against a smooth test function $\psi$ of compact support in $0<y<\infty$ gives
+\[
+ \int_0^\infty A_f(y)\psi(y)\frac{dy}{y^2}
+ =\frac12\int_{\mathbb H}h(z)
+          \sum_{\gcd(c,d)=1}\psi\bigl(1/Q_z(c,d)\bigr)\,d\mu(z).
+\]
+Both signs of a primitive row represent the same image, which accounts for the half~\cite[pp.~275--280]{zagier}. Against $dy/y^2$, the density $y\,\delta(yQ-1)$ evaluates $\psi$ at $1/Q$. Hence $2R^2 A_f(R^{-2})=\sum_{\gcd(c,d)=1}F_f((c,d)/R)$. Each form $Q_z$ has determinant one, so $\int_{\mathbb R^2}\delta(Q_z(v)-1)\,dv=\pi$. Using $\operatorname{area}X=\pi/3$ and $\zeta(2)=\pi^2/6$ gives $\int F_f=2\zeta(2)c_f$. Subtracting the corresponding area term gives the signed discrepancy $D_f(R)$ in \eqref{eq:primitive-flux}.
 
-Conversely, suppose the pointwise flux bound holds for every smooth aperture in a patch of positive theta intensity. Taking square roots recovers the horocycle bound, so the mean-subtracted Mellin integral at $y=0$ is holomorphic for $\operatorname{Re}s>1/4$. At a hypothetical pole $\rho/2$ there, the leading Laurent coefficient of $E(z,s)$ is a nonzero real-analytic function of $z$, as seen from its horizontal average. Some point of the patch has a nonzero coefficient. A sufficiently small nonnegative aperture about that point gives a nonzero pairing, contradicting holomorphy. Varying the aperture thus detects any off-line pair, even if one preparation misses it.
+Now include all integer multiples of each primitive row. The error in this unrestricted count is
+\[
+ K_f(t)=\sum_{k\in\mathbb Z^2\setminus\{0\}}F_f(k/t)-t^2\int F_f .
+\]
+For small $t$ the annulus contains no sampled vector and $K_f(t)=-t^2\int F_f$. At large $t$, Poisson summation gives $K_f(t)=t^2\sum_{k\ne0}\widehat F_f(tk)$ with Fourier phase $e^{-2\pi i v\cdot\xi}$. This is $O_{f,N}(t^{-N})$ for every $N$, also after any fixed number of logarithmic derivatives. To restore primitivity, sum with the M\"obius weights $\mu(m)$. A row with common divisor $n$ receives total weight $\sum_{m\mid n}\mu(m)=\mathbf1_{n=1}$, and the area term acquires the factor $\sum_m\mu(m)m^{-2}=1/\zeta(2)$. Thus
+\[
+ D_f(R)=\sum_{m\ge1}\mu(m)W_f(m/R),\qquad W_f(u)=K_f(1/u).
+\]
+The window can also be obtained from the measured averages. Grouping the unrestricted rows by their common divisor gives $W_f(u)=2u^{-2}[\sum_{n\ge1}n^{-2}A_f(n^2u^2)-\zeta(2)c_f]$. At any fixed $u>0$ only finitely many averages contribute.
+
+\subsection*{Passing the arithmetic bound to the outgoing pulse}
+The volume comparison in Appendix~\ref{app:cut-period}, with the index and cutoff estimates, gives the one-sided bound on $R_{q,d}(X)$ for each admissible reference. Appendix~\ref{app:twisted-reference} uses these references to exclude poles of $1/\zeta(w)$ in $\operatorname{Re}w>\theta$ for every $\theta>1/2$~\cite{volumelean,twistlean}. To apply precisely that information to the count, write $\widehat W_f(w)=\int_0^\infty W_f(u)u^{w-1}\,du$. The estimates on $K_f$ make this transform holomorphic for $\operatorname{Re}w<2$ and rapidly decreasing vertically on closed substrips. For $1<c<2$, Mellin inversion and the Dirichlet series for $1/\zeta$ give
+\[
+ D_f(R)=\frac{1}{2\pi i}\int_{\operatorname{Re}w=c}
+            \frac{\widehat W_f(w)}{\zeta(w)}R^w\,dw .
+\]
+On $\sigma\le\operatorname{Re}w\le c$ with $1/2<\theta<\sigma<c$, the reciprocal grows at most polynomially. Indeed, at large $|b|$ take a disk centered at $2+ib$ lying in $\operatorname{Re}w>\theta$ and reaching to the left of $\sigma$. The Euler product bounds a branch of $\log\zeta$ at its center, and polynomial growth of $\zeta$ bounds the real part above by $O(\log|b|)$. Borel--Carath\'eodory bounds the full logarithm on a smaller disk still reaching $\sigma$. We may therefore shift the contour and obtain $D_f(R)=O_{f,\sigma}(R^\sigma)$. It follows from \eqref{eq:primitive-flux} that $J_f(T)=O_{f,\sigma}(R^{2\sigma-2})=O_{f,\sigma}(e^{-(1-\sigma)T})$. The mean count grows as $R^2$, so this estimate controls a much smaller excess. Taking $\sigma=1/2+\epsilon$ for $0<\epsilon<1/2$ proves \eqref{eq:late-power}. Integration gives the same bound for the energy radiated after $T$.
+
+The exponent taken from the arithmetic matters. If the costs at scale $X$ with $r$ lifts were $X/r+r^2$ up to $X^\epsilon$, balancing them would give exponent $2/3$ provided the other errors remained within that bound~\cite[\S I.8]{primeguide}. The same contour argument would then allow power as slow as $e^{-(1/3-\epsilon)T}$ and individual amplitude rates from $1/6$ to $1/3$ after reflection. The actual balance $X/r+r$ closes this interval at $1/4$.
+
+Which modes can one window miss? For $\operatorname{Re}s>1$, unfolding gives
+\[
+ I_f(s)=\int_X f(z)E(z,s)\,d\mu(z)
+       =\int_0^\infty A_f(y)y^{s-2}\,dy .
+\]
+The power bound and \eqref{eq:loop-flux} give $A_f(y)-c_f=O_{f,\eta}(y^{3/4-\eta})$ for every $\eta>0$, the effective equidistribution estimate for these closed horocycles~\cite{zagier,horoequid}. Subtracting the mean on $0<y<1$ therefore continues the pairing to $\operatorname{Re}s>1/4$ apart from the mean pole at $s=1$. At $s=\rho/2$ the denominator in \eqref{eq:cusp-reflection} vanishes while the numerator is nonzero by the functional equation and the Euler product at $2-\rho$. The leading Laurent coefficient of $E$ is thus a nonzero real-analytic function. Every open patch of positive theta intensity contains a point where it is nonzero. A nonnegative aperture confined near that point gives a nonzero pairing. The pole would contribute $e^{-(1-\rho)T/2}$ to the outgoing amplitude, with possible polynomial factors at higher order. Indeed the height dependence $y^{1-\rho/2}$ at this pole is multiplied by $e^{T/2}$ at $y=e^{-T}$. Its label in \eqref{eq:cusp-decay} is the reflected zero $1-\rho$.
+
+For a fixed aperture that sees at least one pole on $\operatorname{Re}s=1/4$, the late power has the sharp exponential rate
+\[
+  \limsup_{T\to\infty}\frac{\log J_f(T)}{T}=-\tfrac12,
+ \qquad \log0=-\infty .
+\]
+Equation~\eqref{eq:late-power} gives the upper bound. A strictly smaller limsup would give $A_f(y)-c_f=O(y^{3/4+\eta})$ for some $\eta>0$, continuing the pairing across that pole. The limsup permits destructive interference at individual times.
 
 \subsection*{Energy and interference at the cusp}\label{app:outgoing-flux}
 Uetake represents the reduced scattering space by a subspace $K_c$ of $L^2(-\infty,0)$. In the outgoing coordinate $x$, time evolution translates a profile to the right and discards the portion past the exit. The truncated translation preserves $K_c$, so its restriction already gives the reduced semigroup $S(\tau)$~\cite[Theorems~4.4 and~5.1]{uetake}. For a smooth profile $h$ and $\tau\ge0$ the surviving field is $(S(\tau)h)(x)=h(x-\tau)$. Hence
@@ -1142,7 +1198,7 @@ Uetake represents the reduced scattering space by a subspace $K_c$ of $L^2(-\inf
 \]
 All the outgoing flux passes through one scalar amplitude. A mode of generator eigenvalue $-\rho/2$ solves $-h'=-\rho h/2$. Setting $h_\rho(0)=1$ gives $h_\rho(x)=e^{\rho x/2}$ and $\|h_\rho\|_2^2=1/\operatorname{Re}\rho$. Thus the balance law reads off each width from the ratio of exit flux to remaining squared norm. For two distinct modes the difference $h_{\rho_1}-h_{\rho_2}$ has positive norm and zero initial flux. Even when both modes lie on the critical line, compensating their amplitudes by $e^{\tau/4}$ makes the squared norm of their difference initially increase.
 
-The exit amplitude also measures the loss of volume spanned by several profiles. For $G_{ij}(\tau)=\int_{-\infty}^{-\tau}h_i(x)\overline{h_j(x)}\,dx$ and $b_i(\tau)=h_i(-\tau)$ one has $G'=-bb^*$. While $G$ is invertible, $-(\log\det G)'=b^*G^{-1}b$. For $n$ independent eigenprofiles the determinant acquires a factor $\exp[-\tau\sum_j\operatorname{Re}\rho_j]$. The fractional loss rate of the squared volume is therefore $n/2$ on the critical line. This time-dependent Gram matrix uses only the surviving field. The arithmetic determinant of Appendix~\ref{app:cut-period} constrains its rate through the zeros.
+The exit amplitude also measures the loss of volume spanned by several profiles. For $G_{ij}(\tau)=\int_{-\infty}^{-\tau}h_i(x)\overline{h_j(x)}\,dx$ and $b_i(\tau)=h_i(-\tau)$ one has $G'=-bb^*$. While $G$ is invertible, $-(\log\det G)'=b^*G^{-1}b$. For $n$ independent eigenprofiles the determinant acquires a factor $\exp[-\tau\sum_j\operatorname{Re}\rho_j]$. The fractional loss rate of the squared volume is therefore $n/2$ on the critical line. This time-dependent Gram matrix uses only the surviving field. For a pair labeled by $\rho$ and $1-\rho$, the squared volume would decay as $e^{-\tau}$ whatever the two individual rates. The arithmetic volume estimate constrains the individual rates because a suitable observing window can reveal either member of the pair.
 
 Could a different calibration of the same wave norm restore conservation? At a critical height $\gamma$, write $u_\gamma=2^{-1/2}h_{1/2+i\gamma}$ for the unit profile. Direct integration gives
 \[
